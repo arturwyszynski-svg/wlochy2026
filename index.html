@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Epickie Wakacje — Włochy 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<style>
+  :root{
+    --bg:#EBE3D0; --surface:#FBF7EE; --surface-2:#F3ECDB; --inset:#EFE7D4;
+    --ink:#221F17; --muted:#6C6353; --faint:#8A8069; --line:#DFD5BE;
+    --sea:#0F6E67; --sea-deep:#0A4B46; --sea-soft:#DCEBE7;
+    --sole:#CE8410; --sole-soft:#F6E6C6;
+    --olive:#657234; --olive-soft:#E6EAD2;
+    --terra:#B54D2C; --terra-soft:#F4DDD1;
+    --good:#3F7D3A; --good-soft:#E2EED9; --warnc:#B87A12; --warn-soft:#F7E9C7;
+    --shadow:0 1px 2px rgba(40,32,15,.06), 0 6px 20px -8px rgba(40,32,15,.16);
+    --shadow-lg:0 2px 4px rgba(40,32,15,.08), 0 18px 40px -14px rgba(40,32,15,.30);
+    --radius:16px; --radius-sm:10px;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#131E1B; --surface:#1B2823; --surface-2:#213029; --inset:#182420;
+      --ink:#ECE3D0; --muted:#A99E86; --faint:#8B806B; --line:#2C3B34;
+      --sea:#37A99D; --sea-deep:#8FD8CC; --sea-soft:#1E3B36;
+      --sole:#E4B152; --sole-soft:#3A2F16; --olive:#A2B45F; --olive-soft:#2A331B;
+      --terra:#E27C55; --terra-soft:#3A241B;
+      --good:#78B96F; --good-soft:#233524; --warnc:#E4B152; --warn-soft:#37301A;
+      --shadow:0 1px 2px rgba(0,0,0,.30), 0 8px 24px -10px rgba(0,0,0,.55);
+      --shadow-lg:0 2px 6px rgba(0,0,0,.35), 0 22px 48px -16px rgba(0,0,0,.7);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#EBE3D0; --surface:#FBF7EE; --surface-2:#F3ECDB; --inset:#EFE7D4;
+    --ink:#221F17; --muted:#6C6353; --faint:#8A8069; --line:#DFD5BE;
+    --sea:#0F6E67; --sea-deep:#0A4B46; --sea-soft:#DCEBE7;
+    --sole:#CE8410; --sole-soft:#F6E6C6; --olive:#657234; --olive-soft:#E6EAD2;
+    --terra:#B54D2C; --terra-soft:#F4DDD1;
+    --good:#3F7D3A; --good-soft:#E2EED9; --warnc:#B87A12; --warn-soft:#F7E9C7;
+    --shadow:0 1px 2px rgba(40,32,15,.06), 0 6px 20px -8px rgba(40,32,15,.16);
+    --shadow-lg:0 2px 4px rgba(40,32,15,.08), 0 18px 40px -14px rgba(40,32,15,.30);
+    color-scheme:light;
+  }
+  :root[data-theme="dark"]{
+    --bg:#131E1B; --surface:#1B2823; --surface-2:#213029; --inset:#182420;
+    --ink:#ECE3D0; --muted:#A99E86; --faint:#8B806B; --line:#2C3B34;
+    --sea:#37A99D; --sea-deep:#8FD8CC; --sea-soft:#1E3B36;
+    --sole:#E4B152; --sole-soft:#3A2F16; --olive:#A2B45F; --olive-soft:#2A331B;
+    --terra:#E27C55; --terra-soft:#3A241B;
+    --good:#78B96F; --good-soft:#233524; --warnc:#E4B152; --warn-soft:#37301A;
+    --shadow:0 1px 2px rgba(0,0,0,.30), 0 8px 24px -10px rgba(0,0,0,.55);
+    --shadow-lg:0 2px 6px rgba(0,0,0,.35), 0 22px 48px -16px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    line-height:1.6;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 16px 72px;position:relative}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;margin:0}
+  a{color:inherit}
+  button{font-family:inherit}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;overflow:hidden;color:#F6EFDD;
+    background:linear-gradient(160deg,var(--sea) 0%, var(--sea-deep) 88%);
+    border-radius:0 0 26px 26px;box-shadow:var(--shadow-lg)}
+  .hero-inner{max-width:720px;margin:0 auto;padding:24px 20px 74px;position:relative;z-index:2}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(246,239,221,.72);font-weight:600;margin:0 0 8px}
+  .hero h1{font-size:clamp(29px,8vw,42px);line-height:1.03;letter-spacing:.005em;color:#FBF6E9}
+  .hero .route{margin:12px 0 0;font-size:13.5px;color:rgba(246,239,221,.86);
+    display:flex;flex-wrap:wrap;gap:6px 9px;align-items:center}
+  .hero .route b{font-weight:600;color:#FBF6E9}
+  .dot-sep{width:4px;height:4px;border-radius:50%;background:rgba(246,239,221,.5);display:inline-block}
+  .hero-meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .hchip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;
+    padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.18);color:#FBF6E9}
+  .count{margin-top:18px;display:inline-flex;align-items:center;gap:12px;
+    background:var(--sole);color:#2A1C05;padding:9px 15px;border-radius:14px;
+    font-weight:700;box-shadow:0 8px 20px -8px rgba(0,0,0,.4)}
+  .count .n{font-family:var(--serif);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+  .count small{font-weight:600;font-size:12px;opacity:.8;display:block;text-transform:uppercase;letter-spacing:.07em}
+  .hills{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:78px;z-index:1;display:block}
+  .theme-btn{position:absolute;top:16px;right:16px;z-index:3;width:38px;height:38px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);color:#FBF6E9;
+    cursor:pointer;font-size:16px;display:grid;place-items:center;line-height:1}
+  .theme-btn:hover{background:rgba(255,255,255,.22)}
+
+  /* ---------- Tabs ---------- */
+  .tabs{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
+    backdrop-filter:blur(10px);margin:0 -16px 0;padding:8px 10px;border-bottom:1px solid var(--line)}
+  .tabs-scroll{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;max-width:720px;margin:0 auto}
+  .tabs-scroll::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;border:1px solid transparent;background:transparent;color:var(--muted);
+    font-weight:600;font-size:14px;padding:8px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;
+    transition:background .15s,color .15s}
+  .tab:hover{color:var(--ink);background:var(--surface-2)}
+  .tab[aria-selected="true"]{background:var(--sea);color:#FBF6E9;border-color:var(--sea)}
+  .tab:focus-visible{outline:2px solid var(--sole);outline-offset:2px}
+
+  /* ---------- Panels ---------- */
+  .panel{display:none;padding-top:20px}
+  .panel.active{display:block;animation:fade .28s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .lede{color:var(--muted);font-size:15px;margin:2px 0 16px;max-width:62ch}
+  .sec-title{display:flex;align-items:baseline;gap:10px;margin:0 0 4px}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--sea);font-weight:700}
+  .h2{font-size:24px;margin-bottom:2px}
+
+  /* ---------- Cards & shared ---------- */
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:16px;margin-bottom:14px}
+  .btnrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;
+    padding:7px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);
+    color:var(--ink);text-decoration:none;cursor:pointer;transition:transform .12s,box-shadow .12s,background .12s}
+  .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+  .btn:focus-visible{outline:2px solid var(--sole);outline-offset:2px}
+  .btn .ic{width:15px;height:15px;flex:0 0 auto}
+  .btn-sea{background:var(--sea);border-color:var(--sea);color:#FBF6E9}
+  .btn-sea:hover{background:var(--sea-deep)}
+  .btn-sole{background:var(--sole);border-color:var(--sole);color:#2A1C05}
+  .btn-ghost{background:transparent}
+  .btn-sm{padding:5px 9px;font-size:12px}
+  .btn-map .ic{color:var(--terra)}
+  .ic{width:16px;height:16px}
+
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+    padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--inset);color:var(--muted)}
+  .chip.food{background:var(--sole-soft);color:var(--sole);border-color:transparent}
+  .chip.free{background:var(--olive-soft);color:var(--olive);border-color:transparent}
+  .chip.book{background:var(--terra-soft);color:var(--terra);border-color:transparent}
+
+  .note{display:flex;gap:10px;padding:11px 13px;border-radius:12px;background:var(--inset);
+    border:1px solid var(--line);font-size:13.5px;color:var(--muted);margin-top:10px}
+  .note.warn{background:var(--terra-soft);border-color:transparent;color:var(--terra)}
+  .note.warn b{color:var(--terra)}
+  .note .ic{width:16px;height:16px;flex:0 0 auto;margin-top:2px}
+
+  .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.03em;
+    padding:2px 9px;border-radius:999px;text-transform:uppercase}
+  .tag.sea{background:var(--sea-soft);color:var(--sea-deep)}
+  .tag.olive{background:var(--olive-soft);color:var(--olive)}
+  .tag.sole{background:var(--sole-soft);color:var(--sole)}
+
+  /* ---------- Plan / planner ---------- */
+  .assume{display:flex;gap:10px;align-items:flex-start;background:var(--sea-soft);border:1px solid transparent;
+    border-radius:12px;padding:11px 13px;font-size:13px;color:var(--sea-deep);margin-bottom:16px}
+  .assume .ic{color:var(--sea);flex:0 0 auto;margin-top:2px}
+
+  .pday{border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow);
+    margin-bottom:10px;overflow:hidden}
+  .pday.trip{border-left:4px solid var(--sea)}
+  .pday.rest{border-left:4px solid var(--olive)}
+  .pday.road{border-left:4px solid var(--sole)}
+  .pday-head{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;width:100%;
+    background:none;border:none;text-align:left;color:inherit}
+  .pday-head:focus-visible{outline:2px solid var(--sole);outline-offset:-2px}
+  .pday-date{flex:0 0 58px;font-family:var(--serif);font-weight:600;font-size:15px;line-height:1.2}
+  .pday-date small{display:block;font-family:var(--sans);font-weight:600;font-size:11px;color:var(--faint);text-transform:uppercase}
+  .pday-mid{flex:1;min-width:0}
+  .pday-title{font-size:14.5px;font-weight:600}
+  .pday-status{font-size:12.5px;color:var(--muted);margin-top:1px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px}
+  .pill.ok{background:var(--good-soft);color:var(--good)}
+  .pill.tight{background:var(--warn-soft);color:var(--warnc)}
+  .pill.over{background:var(--terra-soft);color:var(--terra)}
+  .pday-caret{flex:0 0 auto;color:var(--faint);transition:transform .2s}
+  .pday.open .pday-caret{transform:rotate(180deg)}
+  .pday-body{padding:2px 14px 16px;border-top:1px solid var(--line);margin-top:2px}
+
+  .pick-title{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:700;margin:12px 0 8px}
+  .poi-grid{display:grid;grid-template-columns:1fr;gap:7px}
+  @media(min-width:520px){.poi-grid{grid-template-columns:1fr 1fr}}
+  .poi{display:flex;gap:10px;align-items:center;padding:9px 11px;border-radius:11px;border:1px solid var(--line);
+    background:var(--surface-2);cursor:pointer;transition:border-color .12s,background .12s}
+  .poi:hover{border-color:var(--sea)}
+  .poi input{width:19px;height:19px;accent-color:var(--sea);flex:0 0 auto;cursor:pointer}
+  .poi .pn{flex:1;min-width:0}
+  .poi .pn b{font-size:14px;font-weight:600;display:block;line-height:1.2}
+  .poi .pn small{font-size:11.5px;color:var(--faint)}
+  .poi .pmeta{font-size:11px;color:var(--muted);font-weight:600;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .poi input:checked ~ .pn b{color:var(--sea-deep)}
+
+  .selstops{list-style:none;margin:12px 0 0;padding:0}
+  .selstops li{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:11px;
+    background:var(--inset);border:1px solid var(--line);margin-bottom:7px}
+  .selstops .idx{flex:0 0 24px;height:24px;border-radius:50%;background:var(--sea);color:#FBF6E9;
+    font-weight:700;font-size:12px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+  .selstops .sn{flex:1;min-width:0}
+  .selstops .sn b{font-size:13.5px;display:block;line-height:1.2}
+  .selstops .sn small{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .selstops .ctrl{display:flex;gap:4px}
+  .iconbtn{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:var(--surface);
+    color:var(--muted);cursor:pointer;display:grid;place-items:center}
+  .iconbtn:hover{color:var(--ink);border-color:var(--sea)}
+  .iconbtn:disabled{opacity:.35;cursor:default}
+  .iconbtn.rm:hover{color:var(--terra);border-color:var(--terra)}
+
+  .verdict{display:flex;gap:11px;align-items:flex-start;border-radius:12px;padding:12px 14px;margin-top:14px;font-size:13.5px}
+  .verdict.ok{background:var(--good-soft);color:var(--good)}
+  .verdict.tight{background:var(--warn-soft);color:var(--warnc)}
+  .verdict.over{background:var(--terra-soft);color:var(--terra)}
+  .verdict .ic{flex:0 0 auto;margin-top:1px}
+  .verdict b{font-weight:700}
+  .verdict .sub{display:block;font-weight:500;margin-top:2px;opacity:.9}
+
+  .sched{list-style:none;margin:12px 0 0;padding:0;position:relative}
+  .sched::before{content:"";position:absolute;left:44px;top:6px;bottom:6px;width:2px;background:var(--line)}
+  .sched li{display:flex;gap:10px;padding:5px 0;position:relative}
+  .sched .clk{flex:0 0 40px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;
+    font-size:12.5px;color:var(--sea-deep);padding-top:1px}
+  .sched .marker{flex:0 0 12px;position:relative;z-index:1}
+  .sched .marker i{position:absolute;left:-1px;top:5px;width:10px;height:10px;border-radius:50%;
+    background:var(--surface);border:2px solid var(--sea)}
+  .sched li.visit .marker i{background:var(--sea)}
+  .sched li.drive .marker i{border-color:var(--faint);width:8px;height:8px;left:0;top:6px}
+  .sched li.lunch .marker i{border-color:var(--sole);background:var(--sole)}
+  .sched .txt{flex:1;font-size:13.5px}
+  .sched .txt b{font-weight:600}
+  .sched li.drive .txt,.sched li.lunch .txt{color:var(--muted);font-size:13px}
+  .sched .dur{font-size:11.5px;color:var(--faint);font-weight:600}
+
+  .daymap{width:100%;border-radius:12px;border:1px solid var(--line);margin-top:14px;display:block;background:var(--surface-2)}
+  .empty-day{text-align:center;color:var(--muted);font-size:14px;padding:8px 0 2px}
+  .empty-day b{color:var(--ink);font-family:var(--serif)}
+
+  /* ---------- Catalog (scenarios) ---------- */
+  .scn{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);
+    background:var(--surface);margin-bottom:16px}
+  .scn-banner{position:relative;height:130px;overflow:hidden}
+  .scn-banner svg{width:100%;height:100%;display:block}
+  .scn-banner .cap{position:absolute;left:14px;bottom:10px;right:14px;color:#fff;z-index:2;text-shadow:0 1px 6px rgba(0,0,0,.45)}
+  .scn-banner .cap h3{color:#fff;font-size:21px;line-height:1.05}
+  .scn-banner .cap .sub{font-size:12.5px;opacity:.95;font-weight:500;margin-top:2px}
+  .scn-banner .badge{position:absolute;top:12px;left:14px;z-index:2;font-size:11px;font-weight:700;
+    letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:999px;
+    background:rgba(0,0,0,.32);color:#fff;backdrop-filter:blur(3px)}
+  .scn-body{padding:14px 16px 16px}
+  .scn-body p{margin:0 0 10px;font-size:14.5px}
+  .facts{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+  .fact{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
+    background:var(--inset);border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--muted)}
+  .fact .ic{width:13px;height:13px}
+
+  .tl{list-style:none;margin:6px 0 0;padding:0;position:relative}
+  .tl::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:var(--line)}
+  .tl li{position:relative;padding:7px 0 7px 24px}
+  .tl li::before{content:"";position:absolute;left:1px;top:12px;width:11px;height:11px;border-radius:50%;
+    background:var(--surface);border:2px solid var(--sea)}
+  .tl li.stop::before{background:var(--sea)}
+  .tl .t{font-variant-numeric:tabular-nums;font-weight:700;font-size:12.5px;color:var(--sea-deep)}
+  .tl .place{font-family:var(--serif);font-weight:600;font-size:15.5px;margin:1px 0 2px}
+  .tl .desc{font-size:13.5px;color:var(--muted)}
+  .tl .desc.plain{color:var(--ink)}
+
+  .addbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+  .addbar label{font-size:12.5px;font-weight:600;color:var(--muted)}
+  select{font:inherit;font-size:13px;font-weight:600;padding:7px 10px;border-radius:10px;border:1px solid var(--line);
+    background:var(--surface-2);color:var(--ink);cursor:pointer}
+  select:focus-visible{outline:2px solid var(--sole);outline-offset:1px}
+
+  /* tickets */
+  .tk-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+  .tk h3{font-size:17px}
+  .tk .where{font-size:12.5px;color:var(--faint);font-weight:600}
+  .tk .price{font-family:var(--serif);font-weight:600;font-size:16px;color:var(--sea-deep);white-space:nowrap}
+  .tk p{margin:6px 0 0;font-size:14px;color:var(--muted)}
+
+  /* costs */
+  .toggles{display:flex;flex-direction:column;gap:2px;margin:4px 0 6px}
+  .tg{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;
+    background:var(--surface);border:1px solid var(--line);cursor:pointer}
+  .tg input{width:20px;height:20px;accent-color:var(--sea);flex:0 0 auto;cursor:pointer}
+  .tg .lab{flex:1;font-size:14.5px;font-weight:600}
+  .tg .lab small{display:block;font-weight:500;color:var(--faint);font-size:12.5px}
+  .tg .amt{font-variant-numeric:tabular-nums;font-size:12.5px;color:var(--muted);font-weight:600;text-align:right}
+  .totals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 8px}
+  .fam{background:linear-gradient(170deg,var(--surface-2),var(--surface));border:1px solid var(--line);
+    border-radius:14px;padding:14px;text-align:center;box-shadow:var(--shadow)}
+  .fam .name{font-family:var(--serif);font-weight:600;font-size:16px}
+  .fam .big{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--sea-deep);
+    font-variant-numeric:tabular-nums;line-height:1.1;margin-top:4px}
+  .fam .ppl{font-size:11.5px;color:var(--faint);margin-top:2px}
+  .grand{text-align:center;font-size:13.5px;color:var(--muted);margin-top:4px}
+  .grand b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .step{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--line);margin-bottom:8px}
+  .step .lab{flex:1;min-width:0;font-size:14.5px;font-weight:600}
+  .step .lab small{display:block;font-weight:500;color:var(--faint);font-size:12.5px}
+  .step .rate{font-size:11px;color:var(--muted);font-weight:600;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;line-height:1.3}
+  .stepper{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+  .stepper button{width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:var(--surface-2);
+    font-size:19px;font-weight:700;cursor:pointer;color:var(--ink);line-height:1;display:grid;place-items:center}
+  .stepper button:hover{border-color:var(--sea);color:var(--sea)}
+  .stepper button:focus-visible{outline:2px solid var(--sole);outline-offset:1px}
+  .stepper .val{min-width:24px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums;font-size:16px}
+  table.cost{width:100%;border-collapse:collapse;margin-top:6px;font-size:13.5px}
+  table.cost th,table.cost td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+  table.cost td.num,table.cost th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  table.cost tr:last-child td{border-bottom:none}
+
+  /* wishlist */
+  .people{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 14px}
+  .person{font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;
+    background:var(--surface-2);border:1px solid var(--line);color:var(--muted)}
+  .person b{color:var(--ink)}
+  textarea{width:100%;min-height:120px;resize:vertical;border-radius:12px;border:1px solid var(--line);
+    background:var(--surface);color:var(--ink);padding:12px;font:inherit;font-size:14.5px}
+  textarea:focus{outline:2px solid var(--sea);outline-offset:1px;border-color:var(--sea)}
+  .saverow{display:flex;align-items:center;gap:12px;margin-top:10px}
+  .saved{font-size:12.5px;color:var(--olive);font-weight:600;opacity:0;transition:opacity .2s}
+  .saved.show{opacity:1}
+
+  .foot{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+  .foot b{color:var(--muted)}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C7.9 2 4.5 5.4 4.5 9.5c0 5.3 6.5 11.7 6.8 12a1 1 0 0 0 1.4 0c.3-.3 6.8-6.7 6.8-12C19.5 5.4 16.1 2 12 2Zm0 10.2a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4Z"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6.5 20a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm11-11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm0 2.5v3a4 4 0 0 1-4 4H9m-2.5-2.5v-6a4 4 0 0 1 4-4h2"/></symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2 2 2 0 0 0 0 4 2 2 0 0 1-2 2H5a2 2 0 0 1-2-2 2 2 0 0 0 0-4Z"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M13 7v10"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-fork" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 3v6a2 2 0 0 0 4 0V3M8 11v10M17 3c-1.5 0-2.5 2-2.5 5s1 4 2.5 4 2.5-1 2.5-4-1-5-2.5-5Zm0 13v5"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 11v5"/><circle cx="12" cy="7.6" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-train" viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M6 10h12M8.5 20 6.5 16m9 4 2-4"/><circle cx="9.5" cy="12.8" r="1" fill="currentColor"/><circle cx="14.5" cy="12.8" r="1" fill="currentColor"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 3 2.5 5.4 5.9.7-4.4 4 1.2 5.8L12 16.9 6.8 19.9 8 14.1l-4.4-4 5.9-.7Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 3 2.5 20h19L12 3Z"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 10v4"/><circle cx="12" cy="17.2" r="1.1" fill="currentColor"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m6 14 6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m6 10 6 6 6-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-caret" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
+</svg>
+
+<header class="hero">
+  <button class="theme-btn" id="themeBtn" title="Zmień motyw" aria-label="Zmień motyw jasny/ciemny">◐</button>
+  <div class="hero-inner">
+    <p class="eyebrow">Wyszyniaki &amp; Kowaliki · Toskania</p>
+    <h1>Epickie Wakacje<br>Włochy 2026</h1>
+    <p class="route">
+      <b>Polska</b><span class="dot-sep"></span><b>Graz</b><span class="dot-sep"></span>
+      <b>Wenecja</b><span class="dot-sep"></span><b>Tirrenia</b><span class="dot-sep"></span>
+      <b>Graz</b><span class="dot-sep"></span><b>Polska</b>
+    </p>
+    <div class="hero-meta">
+      <span class="hchip">23.07 – 05.08.2026</span>
+      <span class="hchip">11 nocy w Tirrenii</span>
+      <span class="hchip">2 rodziny · 9 osób</span>
+    </div>
+    <div class="count"><span class="n" id="cd">–</span><small>dni do<br>wyjazdu</small></div>
+  </div>
+  <svg class="hills" viewBox="0 0 720 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,80 L0,46 C90,26 150,58 240,44 C330,30 380,10 470,26 C560,42 640,30 720,44 L720,80 Z" fill="var(--bg)" opacity="0.55"/>
+    <path d="M0,80 L0,58 C110,44 170,70 270,58 C380,45 450,30 540,44 C620,56 670,50 720,58 L720,80 Z" fill="var(--bg)"/>
+  </svg>
+</header>
+
+<nav class="tabs" aria-label="Sekcje">
+  <div class="tabs-scroll" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="plan">Plan</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="wycieczki">Wycieczki</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="propozycje">Propozycje</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="bilety">Bilety</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="lody">Na lody &amp; dzieci</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="koszty">Koszty</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ============ PLAN ============ -->
+  <section class="panel active" id="plan" role="tabpanel">
+    <div class="sec-title"><span class="kicker">Planer dnia</span></div>
+    <h2 class="h2">Ułóż każdy dzień po swojemu</h2>
+    <p class="lede">Rozwiń dzień i zaznacz, co chcecie zobaczyć. Aplikacja od razu przeliczy godziny, ułoży trasę na mapie i powie, czy zdążycie wrócić na kolację.</p>
+    <div class="assume"><svg class="ic"><use href="#i-clock"/></svg>
+      <span>Założenia: <b>wyjazd po śniadaniu ~8:30</b>, <b>powrót na kolację ~19:30</b>. Czasy dojazdów i zwiedzania są szacunkowe (zaokrąglone w górę), więc jest lekki zapas.</span></div>
+    <div id="planDays"></div>
+
+    <div class="card" style="margin-top:18px">
+      <div class="kicker" style="color:var(--sole)">Nocleg w drodze</div>
+      <h3 style="font-size:16px;margin:4px 0 2px">JUFA Hotel Graz City</h3>
+      <div class="where" style="font-size:12.5px;color:var(--faint);font-weight:600">Idlhofgasse 74, 8020 Graz · w obie strony (23/24.07 i 04/05.08)</div>
+      <div class="btnrow"><a class="btn btn-map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=JUFA%20Hotel%20Graz%20City"><svg class="ic"><use href="#i-pin"/></svg>Mapa</a></div>
+    </div>
+  </section>
+
+  <!-- ============ WYCIECZKI ============ -->
+  <section class="panel" id="wycieczki" role="tabpanel">
+    <div class="sec-title"><span class="kicker">Gotowe scenariusze</span></div>
+    <h2 class="h2">Wycieczki z bazy w Tirrenii</h2>
+    <p class="lede">Sprawdzone plany dnia — godzina po godzinie, z restauracjami i biletami. Każdy możesz jednym kliknięciem wstawić do wybranego dnia w zakładce <b>Plan</b> i tam dalej modyfikować.</p>
+    <div id="catCore"></div>
+  </section>
+
+  <!-- ============ PROPOZYCJE ============ -->
+  <section class="panel" id="propozycje" role="tabpanel">
+    <div class="sec-title"><span class="kicker">Warto rozważyć</span></div>
+    <h2 class="h2">Kierunki na dodatkowy dzień</h2>
+    <p class="lede">Trzy klasyki Toskanii i Ligurii, realne z Tirrenii. Rzetelnie: z czasem dojazdu, tym co zobaczycie i linkami do biletów. Wstaw do dowolnego dnia w zakładce <b>Plan</b>.</p>
+    <div id="catProp"></div>
+
+    <div class="card" style="margin-top:6px">
+      <div class="kicker" style="color:var(--olive)">Co jeszcze chcemy zobaczyć</div>
+      <h3 style="font-size:18px;margin:4px 0 8px">Każdy dorzuca swój pomysł</h3>
+      <div class="people">
+        <span class="person"><b>Artur</b></span><span class="person"><b>Ania</b></span>
+        <span class="person"><b>Ada</b> 2</span><span class="person"><b>Alicja</b> 8</span>
+        <span class="person"><b>Adam</b> 10</span><span class="person"><b>Mariusz</b></span>
+        <span class="person"><b>Paulina</b></span><span class="person"><b>Kuba</b> 9</span>
+        <span class="person"><b>Julka</b> 12</span>
+      </div>
+      <textarea id="wish" placeholder="Wpisz swoje propozycje — miejsce, plaża, atrakcja... np. „Julka: park wodny”, „Adam: zamek”."></textarea>
+      <div class="saverow">
+        <button class="btn btn-sole" id="saveWish"><svg class="ic"><use href="#i-star"/></svg>Zapisz na tym urządzeniu</button>
+        <span class="saved" id="savedMsg">Zapisano ✓</span>
+      </div>
+      <div class="note"><svg class="ic"><use href="#i-info"/></svg><span>Notatnik zapisuje się tylko na Twoim telefonie. Wspólną listę uzupełniamy w dokumencie Word „Epickie Wakacje Włochy 2026”.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ BILETY ============ -->
+  <section class="panel" id="bilety" role="tabpanel">
+    <div class="sec-title"><span class="kicker">Rezerwuj z wyprzedzeniem</span></div>
+    <h2 class="h2">Bilety online</h2>
+    <p class="lede">Wejścia limitowane godzinowo — najważniejsze bilety kupcie zawczasu. Linki prowadzą do <b>oficjalnych</b> kas. Ceny orientacyjne (2026).</p>
+    <div id="tickets"></div>
+  </section>
+
+  <!-- ============ LODY & DZIECI ============ -->
+  <section class="panel" id="lody" role="tabpanel">
+    <div class="sec-title"><span class="kicker">Lżejsze popołudnia</span></div>
+    <h2 class="h2">Na lody &amp; dla dzieci</h2>
+    <p class="lede">Na dni odpoczynku: rano plaża/basen, ok. 16:00–17:00 krótki wypad (max 30 min autem), powrót przed kolacją.</p>
+    <div id="icecream"></div>
+    <div class="card">
+      <div class="kicker" style="color:var(--olive)">Najwygodniejsze dla całej grupy</div>
+      <h3 style="font-size:18px;margin:4px 0 8px">Płasko i bez schodów</h3>
+      <div class="chips">
+        <span class="chip free"><svg class="ic" style="width:13px;height:13px"><use href="#i-star"/></svg>Mury w Lukce — 4,2 km płaskiej trasy, można rowerem</span>
+        <span class="chip free"><svg class="ic" style="width:13px;height:13px"><use href="#i-star"/></svg>Piazza dei Miracoli w Pizie — równy trawnik</span>
+        <span class="chip free"><svg class="ic" style="width:13px;height:13px"><use href="#i-star"/></svg>Terrazza Mascagni — szeroki taras nad morzem</span>
+        <span class="chip free"><svg class="ic" style="width:13px;height:13px"><use href="#i-star"/></svg>Acquario di Livorno — akwarium dla dzieci</span>
+      </div>
+      <div class="note warn"><svg class="ic"><use href="#i-warn"/></svg><span>San Gimignano i Volterra mają strome, brukowane uliczki — oceńcie wygodę dla <b>Ali</b> na miejscu; w razie czego zostańcie w jednej z nich.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ KOSZTY ============ -->
+  <section class="panel" id="koszty" role="tabpanel">
+    <div class="sec-title"><span class="kicker">Realny budżet</span></div>
+    <h2 class="h2">Kalkulator kosztów</h2>
+    <p class="lede">Liczone dziennie i uczciwie: w hotelu macie tylko <b>śniadanie i obiadokolację</b>, więc <b>obiad na mieście jecie codziennie</b> — też w dni „hotelowe". Ustaw liczbę dni, resztę policzy sam. Podział: <b>Wyszyniaki</b> (5 osób) / <b>Kowaliki</b> (4 osoby).</p>
+    <div class="totals">
+      <div class="fam"><div class="name">Wyszyniaki</div><div class="big" id="totW">–</div><div class="ppl">Artur · Ania · Ada · Alicja · Adam</div></div>
+      <div class="fam"><div class="name">Kowaliki</div><div class="big" id="totK">–</div><div class="ppl">Mariusz · Paulina · Kuba · Julka</div></div>
+    </div>
+    <p class="grand">Razem grupa: <b id="totAll">–</b> · cały wyjazd</p>
+
+    <h3 style="font-size:16px;margin:18px 0 8px">Wyżywienie poza hotelem</h3>
+    <div id="steps"></div>
+    <p class="grand" style="text-align:left;margin:6px 2px 0;font-size:12.5px" id="foodSub"></p>
+
+    <h3 style="font-size:16px;margin:20px 0 8px">Bilety wstępu</h3>
+    <div class="toggles" id="toggles"></div>
+
+    <div class="card" style="margin-top:14px">
+      <h3 style="font-size:16px;margin-bottom:2px">Autostrady i winiety</h3>
+      <p style="font-size:13.5px;color:var(--muted);margin:4px 0 0">Stała pozycja: <b>~160 €/auto</b> w obie strony (Wyszyniaki — Pacifica, Kowaliki — Ford Escape). Winieta Austria 2× 10-dni + ewentualnie Czechy + bramki Włochy klasa B.</p>
+      <div class="note"><svg class="ic"><use href="#i-info"/></svg><span>LPG nie ma zniżki w Czechach — Pacifica na gazie płaci pełną stawkę.</span></div>
+    </div>
+
+    <div class="note"><svg class="ic"><use href="#i-info"/></svg><span>Przyjęte stawki (Twoje szacunki): obiad z napojem dorosły ~25–27 €, dziecko ~18–20 €, dzień wycieczkowy z lodami i napojami ~200 €/rodzina, dzień hotelowy (sam obiad na mieście) ~100–110 €/rodzina. Śniadania i obiadokolacje w Tirrenii są w cenie hotelu — nie liczymy ich.</span></div>
+    <div class="note warn"><svg class="ic"><use href="#i-warn"/></svg><span>To wciąż szacunek (±15%). Nie obejmuje noclegów, paliwa <i>we Włoszech</i> ani zakupów i pamiątek.</span></div>
+  </section>
+
+  <footer class="foot">
+    <p><b>Jak używać:</b> otwórz na telefonie i dodaj do ekranu głównego. W zakładce <b>Plan</b> układasz każdy dzień; „Trasa” otwiera nawigację Google Maps, „Bilety” prowadzą do oficjalnych kas. Twoje zmiany planu zapisują się na tym urządzeniu.</p>
+    <p style="margin-top:8px">Ilustracje kierunków są rysowane (stylizowane pocztówki) — nie zdjęcia. Plan na podstawie dokumentu „Epickie Wakacje Włochy 2026”.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var enc = encodeURIComponent;
+  function pad(n){ return (n<10?'0':'')+n; }
+  function fmt(m){ m=Math.round(m); var h=Math.floor(m/60), mm=m%60; return h+':'+pad(mm); }
+  function pinUrl(q){ return 'https://www.google.com/maps/search/?api=1&query='+enc(q); }
+
+  /* ---------- Countdown ---------- */
+  var target=new Date(2026,6,23,7,0,0), days=Math.ceil((target-new Date())/86400000);
+  var cd=document.getElementById('cd');
+  cd.textContent = days>0?days:(days===0?'0':'✓');
+  if(days<=0){ document.querySelector('.count small').innerHTML = days===0?'wyjazd<br>dziś!':'w podróży!'; }
+
+  /* ---------- Theme ---------- */
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var cur=document.documentElement.getAttribute('data-theme');
+    var isDark=cur?cur==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme',isDark?'light':'dark');
+  });
+
+  /* ---------- Tabs ---------- */
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function showTab(name){
+    tabs.forEach(function(x){ x.setAttribute('aria-selected', x.dataset.tab===name?'true':'false'); });
+    document.querySelectorAll('.panel').forEach(function(p){ p.classList.toggle('active',p.id===name); });
+  }
+  tabs.forEach(function(t){ t.addEventListener('click',function(){ showTab(t.dataset.tab); window.scrollTo({top:0,behavior:'smooth'}); }); });
+
+  /* ---------- Calendar days ---------- */
+  var CAL=[
+    ['23.07','czw','Polska → Graz, nocleg','road'],
+    ['24.07','pt','Graz → Wenecja → Tirrenia, zakwaterowanie','road'],
+    ['25.07','sob','Dzień w hotelu — regeneracja','rest'],
+    ['26.07','nd','Dzień w hotelu (plaża / basen)','rest'],
+    ['27.07','pon','Wolny do zaplanowania','rest'],
+    ['28.07','wt','Wolny do zaplanowania','rest'],
+    ['29.07','śr','Wolny do zaplanowania','rest'],
+    ['30.07','czw','Wolny do zaplanowania','rest'],
+    ['31.07','pt','Wolny do zaplanowania','rest'],
+    ['01.08','sob','Wolny do zaplanowania','rest'],
+    ['02.08','nd','Wolny do zaplanowania','rest'],
+    ['03.08','pon','Dzień w hotelu, pakowanie','rest'],
+    ['04.08','wt','Wymeldowanie → Graz, nocleg','road'],
+    ['05.08','śr','Graz → Polska','road']
+  ];
+  var EDITABLE={}; CAL.forEach(function(d,i){ if(d[3]!=='road') EDITABLE[d[0]]=true; });
+
+  /* ---------- POIs (base = Tirrenia) ---------- */
+  var BASE={name:'Tirrenia (baza)', lat:43.605, lon:10.283, q:'TH Tirrenia Green Park Resort, Calambrone'};
+  var POI={
+    pisa:{name:'Piza', short:'Krzywa Wieża, Piazza dei Miracoli', lat:43.723, lon:10.396, drive:25, visit:120, q:'Piazza dei Miracoli, Pisa'},
+    lucca:{name:'Lukka', short:'Renesansowe mury na spacer/rower', lat:43.843, lon:10.503, drive:40, visit:120, q:'Mura di Lucca'},
+    firenze:{name:'Florencja', short:'Kolebka renesansu — Duomo, Uffizi', lat:43.771, lon:11.256, drive:80, visit:300, q:'Piazzale Michelangelo, Firenze'},
+    volterra:{name:'Volterra', short:'Etruskie mury, alabaster', lat:43.402, lon:10.862, drive:75, visit:105, q:'Volterra'},
+    sangimignano:{name:'San Gimignano', short:'Miasto wież', lat:43.468, lon:11.043, drive:70, visit:120, q:'San Gimignano'},
+    livorno:{name:'Livorno', short:'Akwarium i taras Mascagni', lat:43.548, lon:10.310, drive:20, visit:150, q:'Acquario di Livorno'},
+    castiglioncello:{name:'Castiglioncello', short:'Nadmorskie klify, plaża', lat:43.403, lon:10.410, drive:40, visit:90, q:'Castiglioncello'},
+    siena:{name:'Siena', short:'Piazza del Campo i katedra', lat:43.318, lon:11.331, drive:100, visit:210, q:'Piazza del Campo, Siena'},
+    cinqueterre:{name:'Cinque Terre', short:'Pięć wiosek koleją (z La Spezia)', lat:44.099, lon:9.828, drive:90, visit:360, train:true, q:'Stazione La Spezia Centrale'},
+    pienza:{name:'Pienza & Val d’Orcia', short:'Renesans i krajobraz z „Gladiatora”', lat:43.076, lon:11.679, drive:140, visit:210, q:'Pienza'}
+  };
+  /* pairwise driving minutes (conservative). fallback = via base */
+  var BETW={
+    'pisa|lucca':30,'pisa|livorno':25,'pisa|firenze':70,'pisa|volterra':70,'pisa|sangimignano':80,'pisa|castiglioncello':45,
+    'lucca|firenze':70,'lucca|livorno':40,
+    'volterra|sangimignano':40,'volterra|siena':60,'volterra|livorno':70,
+    'sangimignano|siena':50,'sangimignano|firenze':65,
+    'firenze|siena':80,'firenze|pienza':120,
+    'siena|pienza':60,'livorno|castiglioncello':30,'livorno|siena':110
+  };
+  function driveBetween(a,b){
+    if(a===b) return 0;
+    if(a==='base') return POI[b].drive;
+    if(b==='base') return POI[a].drive;
+    var k1=a+'|'+b, k2=b+'|'+a;
+    if(BETW[k1]!=null) return BETW[k1];
+    if(BETW[k2]!=null) return BETW[k2];
+    return POI[a].drive+POI[b].drive; /* conservative upper bound via base */
+  }
+  var START=510, DINNER=1170; /* 8:30 .. 19:30 */
+
+  function schedule(stops){
+    var seg=[], t=START, prev='base', lunch=false, driveTot=0;
+    for(var i=0;i<stops.length;i++){
+      var id=stops[i], d=driveBetween(prev,id); driveTot+=d;
+      seg.push({type:'drive',dur:d,start:t,from:prev,to:id}); t+=d;
+      if(!lunch && t>=750){ seg.push({type:'lunch',dur:60,start:t}); t+=60; lunch=true; }
+      var arrive=t, v=POI[id].visit;
+      seg.push({type:'visit',id:id,dur:v,start:arrive,end:arrive+v}); t+=v;
+      prev=id;
+    }
+    if(stops.length){ var db=driveBetween(prev,'base'); driveTot+=db; seg.push({type:'drive',dur:db,start:t,from:prev,to:'base'}); t+=db; }
+    return {seg:seg, home:t, feasible:t<=DINNER, over:t-DINNER, margin:DINNER-t, driveTot:driveTot};
+  }
+
+  /* ---------- Plan state ---------- */
+  var PKEY='wlochy2026-plan-v2';
+  var DEFAULT={'27.07':['pisa','lucca'],'29.07':['firenze'],'31.07':['volterra','sangimignano'],'02.08':['livorno','castiglioncello']};
+  var plan={};
+  try{ var s=localStorage.getItem(PKEY); plan = s?JSON.parse(s):JSON.parse(JSON.stringify(DEFAULT)); }catch(e){ plan=JSON.parse(JSON.stringify(DEFAULT)); }
+  function persist(){ try{ localStorage.setItem(PKEY, JSON.stringify(plan)); }catch(e){} }
+  var openDay=null;
+  var POI_ORDER=['pisa','lucca','livorno','castiglioncello','volterra','sangimignano','firenze','siena','cinqueterre','pienza'];
+
+  /* ---------- Day map (schematic) ---------- */
+  function dayMap(stops){
+    var W=340,H=300,pad=26;
+    var lonMin=9.72,lonMax=11.78,latMin=43.02,latMax=44.16;
+    function X(lon){ return pad+(lon-lonMin)/(lonMax-lonMin)*(W-2*pad); }
+    function Y(lat){ return pad+(latMax-lat)/(latMax-latMin)*(H-2*pad); }
+    var s='<svg class="daymap" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Mapa trasy dnia">';
+    s+='<defs><linearGradient id="sea" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--sea-soft)"/><stop offset="1" stop-color="var(--surface-2)"/></linearGradient></defs>';
+    s+='<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="url(#sea)"/>';
+    /* faint coast strip */
+    s+='<path d="M0,0 L'+(pad+6)+',0 Q'+(pad-4)+','+(H/2)+' '+(pad+10)+','+H+' L0,'+H+' Z" fill="var(--sea)" opacity="0.10"/>';
+    /* all POIs faint */
+    for(var k in POI){ var p=POI[k], cx=X(p.lon), cy=Y(p.lat), on=stops.indexOf(k)>=0;
+      if(!on){ s+='<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="2.6" fill="var(--faint)" opacity="0.5"/>'; }
+    }
+    /* base */
+    var bx=X(BASE.lon), by=Y(BASE.lat);
+    /* route */
+    if(stops.length){
+      var pts=[[bx,by]]; stops.forEach(function(id){ pts.push([X(POI[id].lon),Y(POI[id].lat)]); }); pts.push([bx,by]);
+      var dpath='M'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' L');
+      s+='<path d="'+dpath+'" fill="none" stroke="var(--sea)" stroke-width="2.4" stroke-linejoin="round" stroke-dasharray="1 6" stroke-linecap="round" opacity="0.85"/>';
+      stops.forEach(function(id,i){ var cx=X(POI[id].lon),cy=Y(POI[id].lat);
+        s+='<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="10" fill="var(--sea)"/>';
+        s+='<text x="'+cx.toFixed(1)+'" y="'+(cy+3.6).toFixed(1)+'" text-anchor="middle" font-size="11" font-weight="700" fill="#FBF6E9">'+(i+1)+'</text>';
+        var tx=cx+(cx>W/2?-12:12), anch=cx>W/2?'end':'start';
+        s+='<text x="'+tx.toFixed(1)+'" y="'+(cy-12).toFixed(1)+'" text-anchor="'+anch+'" font-size="10.5" font-weight="600" fill="var(--ink)">'+POI[id].name+'</text>';
+      });
+    }
+    /* base marker on top */
+    s+='<g><circle cx="'+bx.toFixed(1)+'" cy="'+by.toFixed(1)+'" r="7" fill="var(--sole)" stroke="#fff" stroke-width="1.5"/>';
+    s+='<text x="'+(bx+11).toFixed(1)+'" y="'+(by+3.5).toFixed(1)+'" font-size="10.5" font-weight="700" fill="var(--ink)">Tirrenia</text></g>';
+    s+='</svg>';
+    return s;
+  }
+
+  /* ---------- Render plan ---------- */
+  var planDays=document.getElementById('planDays');
+  function dayStatus(dateKey,type){
+    if(type==='road') return {txt:CAL.find(function(c){return c[0]===dateKey;})[2], pill:''};
+    var stops=plan[dateKey]||[];
+    if(!stops.length) return {txt:'Dzień w hotelu — plaża, basen, relaks', pill:''};
+    var r=schedule(stops);
+    var names=stops.map(function(s){return POI[s].name;}).join(' · ');
+    var pillCls = !r.feasible?'over':(r.margin<45?'tight':'ok');
+    var pillTxt = !r.feasible?'za dużo':(r.margin<45?'na styk':'zdążycie');
+    var pill='<span class="pill '+pillCls+'">'+(pillCls==='over'?'⚠ ':'')+'powrót '+fmt(r.home)+' · '+pillTxt+'</span>';
+    return {txt:names, pill:pill};
+  }
+  function editorHTML(dateKey){
+    var stops=plan[dateKey]||[];
+    var h='';
+    /* checkboxes */
+    h+='<div class="pick-title">Dodaj punkty do dnia</div><div class="poi-grid">';
+    POI_ORDER.forEach(function(id){
+      var p=POI[id], on=stops.indexOf(id)>=0;
+      h+='<label class="poi"><input type="checkbox" class="poi-cb" data-day="'+dateKey+'" data-poi="'+id+'"'+(on?' checked':'')+'>'+
+         '<span class="pn"><b>'+p.name+'</b><small>'+p.short+'</small></span>'+
+         '<span class="pmeta">dojazd '+Math.round(p.drive)+' min<br>zwiedz. '+(p.visit>=60?(Math.round(p.visit/60*10)/10+' h'):(p.visit+' min'))+'</span></label>';
+    });
+    h+='</div>';
+    if(!stops.length){
+      h+='<div class="empty-day"><b>Dzień wolny.</b> Zaznacz punkty powyżej albo wstaw gotową wycieczkę z zakładki „Wycieczki”.</div>';
+      h+=dayMap([]);
+      return h;
+    }
+    /* selected + reorder */
+    h+='<div class="pick-title" style="margin-top:16px">Kolejność zwiedzania</div><ul class="selstops">';
+    var r=schedule(stops);
+    /* map visit segments to stops for times */
+    var visitSeg=r.seg.filter(function(x){return x.type==='visit';});
+    stops.forEach(function(id,i){
+      var vs=visitSeg[i];
+      h+='<li><span class="idx">'+(i+1)+'</span><span class="sn"><b>'+POI[id].name+'</b>'+
+         '<small>'+fmt(vs.start)+'–'+fmt(vs.end)+' · zwiedzanie '+(POI[id].visit>=60?(Math.round(POI[id].visit/60*10)/10+' h'):(POI[id].visit+' min'))+'</small></span>'+
+         '<span class="ctrl">'+
+         '<button class="iconbtn" data-act="up" data-day="'+dateKey+'" data-poi="'+id+'"'+(i===0?' disabled':'')+' aria-label="W górę"><svg class="ic" style="width:15px;height:15px"><use href="#i-up"/></svg></button>'+
+         '<button class="iconbtn" data-act="down" data-day="'+dateKey+'" data-poi="'+id+'"'+(i===stops.length-1?' disabled':'')+' aria-label="W dół"><svg class="ic" style="width:15px;height:15px"><use href="#i-down"/></svg></button>'+
+         '<button class="iconbtn rm" data-act="remove" data-day="'+dateKey+'" data-poi="'+id+'" aria-label="Usuń"><svg class="ic" style="width:15px;height:15px"><use href="#i-x"/></svg></button>'+
+         '</span></li>';
+    });
+    h+='</ul>';
+    /* verdict */
+    var vCls=!r.feasible?'over':(r.margin<45?'tight':'ok');
+    var icon=!r.feasible?'i-warn':(r.margin<45?'i-clock':'i-check');
+    var msg;
+    if(!r.feasible){ msg='<b>Za dużo jak na jeden dzień.</b><span class="sub">Powrót dopiero ~'+fmt(r.home)+' — to '+fmt(r.over).replace(/^0:/,'').replace(':',' h ')+' min po kolacji (19:30). Usuń punkt albo przełóż na inny dzień.</span>'; }
+    else if(r.margin<45){ msg='<b>Zdążycie, ale na styk.</b><span class="sub">Powrót ~'+fmt(r.home)+' — zapas do kolacji tylko '+Math.round(r.margin)+' min. Trzymajcie się godzin.</span>'; }
+    else { msg='<b>Spokojnie zdążycie na kolację.</b><span class="sub">Powrót ~'+fmt(r.home)+' (zapas '+Math.round(r.margin)+' min). Przejazdy razem ~'+Math.round(r.driveTot/60*10)/10+' h.</span>'; }
+    h+='<div class="verdict '+vCls+'"><svg class="ic"><use href="#'+icon+'"/></svg><span>'+msg+'</span></div>';
+    if(stops.indexOf('cinqueterre')>=0 && stops.length>1){
+      h+='<div class="note warn"><svg class="ic"><use href="#i-warn"/></svg><span>Cinque Terre to <b>osobny, całodniowy</b> plan (dojazd do La Spezia + zwiedzanie pociągiem). Lepiej nie łączyć go z innymi punktami.</span></div>';
+    }
+    /* schedule timeline */
+    h+='<div class="pick-title" style="margin-top:16px">Plan godzinowy</div><ul class="sched">';
+    h+='<li class="drive"><span class="clk">'+fmt(START)+'</span><span class="marker"><i></i></span><span class="txt">Wyjazd z Tirrenii po śniadaniu</span></li>';
+    r.seg.forEach(function(x){
+      if(x.type==='drive'){
+        var to=x.to==='base'?'Tirrenia':POI[x.to].name;
+        h+='<li class="drive"><span class="clk">'+fmt(x.start)+'</span><span class="marker"><i></i></span><span class="txt">Przejazd → '+to+' <span class="dur">('+Math.round(x.dur)+' min)</span></span></li>';
+      } else if(x.type==='lunch'){
+        h+='<li class="lunch"><span class="clk">'+fmt(x.start)+'</span><span class="marker"><i></i></span><span class="txt">Obiad <span class="dur">(~1 h)</span></span></li>';
+      } else {
+        h+='<li class="visit"><span class="clk">'+fmt(x.start)+'</span><span class="marker"><i></i></span><span class="txt"><b>'+POI[x.id].name+'</b> — zwiedzanie <span class="dur">('+(x.dur>=60?(Math.round(x.dur/60*10)/10+' h'):(x.dur+' min'))+')</span></span></li>';
+      }
+    });
+    h+='<li class="visit"><span class="clk">'+fmt(r.home)+'</span><span class="marker"><i></i></span><span class="txt"><b>Powrót do Tirrenii</b> — kolacja</span></li>';
+    h+='</ul>';
+    /* map + buttons */
+    h+=dayMap(stops);
+    var wp=stops.map(function(id){return enc(POI[id].q);}).join('%7C');
+    var gmap='https://www.google.com/maps/dir/?api=1&origin='+enc('Tirrenia, Italia')+'&destination='+enc('Tirrenia, Italia')+'&waypoints='+wp;
+    h+='<div class="btnrow"><a class="btn btn-sea" target="_blank" rel="noopener" href="'+gmap+'"><svg class="ic"><use href="#i-route"/></svg>Trasa dnia w Google Maps</a>'+
+       '<button class="btn btn-ghost" data-act="clear" data-day="'+dateKey+'"><svg class="ic"><use href="#i-x"/></svg>Wyczyść dzień</button></div>';
+    return h;
+  }
+  function renderPlan(){
+    var h='';
+    CAL.forEach(function(d){
+      var dateKey=d[0], type=d[3], editable=type!=='road';
+      var st=dayStatus(dateKey,type), isOpen=openDay===dateKey;
+      h+='<div class="pday '+ (type==='road'?'road':(plan[dateKey]&&plan[dateKey].length?'trip':'rest')) +(isOpen?' open':'')+'">';
+      h+='<button class="pday-head" '+(editable?'data-act="toggle" data-day="'+dateKey+'"':'disabled style="cursor:default"')+'>';
+      h+='<span class="pday-date">'+dateKey+'<small>'+d[1]+'</small></span>';
+      h+='<span class="pday-mid"><span class="pday-title">'+(editable?(plan[dateKey]&&plan[dateKey].length?'Wycieczka':'Dzień wolny'):d[2])+'</span>';
+      h+='<span class="pday-status">'+st.txt+' '+(st.pill||'')+'</span></span>';
+      if(editable) h+='<span class="pday-caret"><svg class="ic"><use href="#i-caret"/></svg></span>';
+      h+='</button>';
+      if(editable && isOpen){ h+='<div class="pday-body">'+editorHTML(dateKey)+'</div>'; }
+      h+='</div>';
+    });
+    planDays.innerHTML=h;
+  }
+
+  planDays.addEventListener('click',function(e){
+    var b=e.target.closest('[data-act]'); if(!b) return;
+    var act=b.dataset.act, day=b.dataset.day, poi=b.dataset.poi;
+    if(act==='toggle'){ openDay = openDay===day?null:day; renderPlan();
+      if(openDay){ var el=planDays.querySelector('.pday.open'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); } return; }
+    var arr=plan[day]||(plan[day]=[]);
+    if(act==='remove'){ plan[day]=arr.filter(function(x){return x!==poi;}); }
+    else if(act==='clear'){ plan[day]=[]; }
+    else if(act==='up'){ var i=arr.indexOf(poi); if(i>0){ arr.splice(i,1); arr.splice(i-1,0,poi);} }
+    else if(act==='down'){ var j=arr.indexOf(poi); if(j>=0&&j<arr.length-1){ arr.splice(j,1); arr.splice(j+1,0,poi);} }
+    persist(); renderPlan();
+  });
+  planDays.addEventListener('change',function(e){
+    var cb=e.target.closest('.poi-cb'); if(!cb) return;
+    var day=cb.dataset.day, poi=cb.dataset.poi, arr=plan[day]||(plan[day]=[]);
+    if(cb.checked){ if(arr.indexOf(poi)<0) arr.push(poi); } else { plan[day]=arr.filter(function(x){return x!==poi;}); }
+    persist(); renderPlan();
+  });
+  renderPlan();
+
+  /* ---------- Scene illustrations (postcards) ---------- */
+  function scene(id){
+    var g={
+      pisa:['#F6C67A','#E88B3F'], firenze:['#EBB865','#C0602A'], voltsg:['#8FBFC0','#3E7C6E'],
+      livorno:['#63B7C4','#1E6E7E'], siena:['#E79A4E','#B0491C'], cinque:['#5AB6C9','#1B6F86'], pienza:['#B7C86A','#5E7A34']
+    }[id];
+    var sky='<defs><linearGradient id="sk'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+g[0]+'"/><stop offset="1" stop-color="'+g[1]+'"/></linearGradient></defs><rect width="400" height="140" fill="url(#sk'+id+')"/>';
+    var art={
+      pisa:'<circle cx="60" cy="30" r="16" fill="#FBE3A6" opacity=".8"/><rect x="0" y="112" width="400" height="28" fill="#3f6b3a"/><g fill="#8a3d1e"><rect x="150" y="52" width="46" height="60" rx="4"/><path d="M150 52h46l-23-16z"/></g><g transform="rotate(9 300 112)" fill="#a94e28"><rect x="286" y="30" width="28" height="82"/><rect x="284" y="26" width="32" height="8" rx="3"/><rect x="284" y="46" width="32" height="4" opacity=".5" fill="#fff"/><rect x="284" y="60" width="32" height="4" opacity=".5" fill="#fff"/><rect x="284" y="74" width="32" height="4" opacity=".5" fill="#fff"/></g>',
+      firenze:'<circle cx="330" cy="34" r="15" fill="#FBE7C0" opacity=".8"/><rect x="0" y="118" width="400" height="22" fill="#7a4a24"/><g fill="#9c4a22"><path d="M170 118V70a30 20 0 0 1 60 0v48z"/><path d="M200 40l30 30h-60z"/><rect x="196" y="30" width="8" height="12"/></g><rect x="120" y="60" width="20" height="58" fill="#b06a35"/><rect x="118" y="54" width="24" height="8" fill="#8a4a22"/><rect x="262" y="72" width="16" height="46" fill="#b06a35"/>',
+      voltsg:'<rect x="0" y="86" width="400" height="54" fill="#3E7C6E"/><path d="M0 92 Q120 66 220 88 T400 84 V140 H0Z" fill="#4f8a72"/><g fill="#5a4632"><rect x="150" y="38" width="16" height="60"/><rect x="176" y="22" width="16" height="76"/><rect x="202" y="46" width="16" height="52"/><rect x="228" y="30" width="16" height="68"/><rect x="254" y="52" width="14" height="46"/></g>',
+      livorno:'<rect x="0" y="70" width="400" height="70" fill="#2E8DA0"/><path d="M0 70h400v10H0z" fill="#fff" opacity=".2"/><g><rect x="0" y="104" width="400" height="36" fill="#e9e2d0"/><g fill="#cfc6b0"><rect x="20" y="104" width="20" height="18"/><rect x="60" y="104" width="20" height="18"/><rect x="100" y="104" width="20" height="18"/><rect x="140" y="104" width="20" height="18"/><rect x="180" y="104" width="20" height="18"/><rect x="220" y="104" width="20" height="18"/><rect x="260" y="104" width="20" height="18"/><rect x="300" y="104" width="20" height="18"/><rect x="340" y="104" width="20" height="18"/><rect x="380" y="104" width="20" height="18"/></g></g><g><path d="M300 40v42" stroke="#5a4632" stroke-width="3"/><path d="M300 44l26 30h-26z" fill="#fff"/><path d="M300 44l-22 30h22z" fill="#e5ddc8"/></g>',
+      siena:'<rect x="0" y="112" width="400" height="28" fill="#8a4a22"/><path d="M0 112 Q200 128 400 112 V140 H0Z" fill="#b0491c" opacity=".5"/><g fill="#7a3316"><rect x="196" y="24" width="20" height="88"/><rect x="192" y="18" width="28" height="10"/><rect x="150" y="66" width="52" height="46"/></g><circle cx="70" cy="34" r="14" fill="#FBE3A6" opacity=".8"/>',
+      cinque:'<rect x="0" y="84" width="400" height="56" fill="#1E7E92"/><path d="M0 84 Q100 74 200 84 T400 82 V140 H0Z" fill="#2A93A8"/><g><rect x="150" y="40" width="30" height="52" fill="#E1683C"/><rect x="184" y="30" width="30" height="62" fill="#EBB446"/><rect x="218" y="46" width="30" height="46" fill="#D9534F"/><rect x="252" y="34" width="30" height="58" fill="#E9A23B"/><rect x="118" y="52" width="30" height="40" fill="#E8724A"/></g><path d="M40 30l0 0" /><g fill="#5a4632"><rect x="100" y="30" width="220" height="4" opacity=".0"/></g>',
+      pienza:'<circle cx="330" cy="36" r="16" fill="#FBEBB6" opacity=".85"/><path d="M0 96 Q140 70 400 96 V140 H0Z" fill="#6E8A3C"/><path d="M0 112 Q160 92 400 116 V140 H0Z" fill="#5E7A34"/><g fill="#33471f"><path d="M150 60c8 0 10 40 10 46h-20c0-6 2-46 10-46z"/><path d="M182 52c9 0 11 44 11 54h-22c0-10 2-54 11-54z"/><path d="M214 62c8 0 10 38 10 44h-20c0-6 2-44 10-44z"/></g>'
+    };
+    return '<svg viewBox="0 0 400 140" preserveAspectRatio="xMidYMid slice">'+sky+art[id]+'</svg>';
+  }
+
+  /* ---------- Scenarios (catalog) ---------- */
+  var mapBtn=function(q,label){ return '<a class="btn btn-map btn-sm" target="_blank" rel="noopener" href="'+pinUrl(q)+'"><svg class="ic" style="width:14px;height:14px"><use href="#i-pin"/></svg>'+(label||'Mapa')+'</a>'; };
+  function tlItems(items){
+    return items.map(function(it){
+      var h='<li'+(it.stop?' class="stop"':'')+'><div class="t">'+it.t+'</div>';
+      if(it.place) h+='<div class="place">'+it.place+'</div>';
+      if(it.desc) h+='<div class="desc'+(it.plain?' plain':'')+'">'+it.desc+'</div>';
+      if(it.map) h+='<div class="btnrow">'+mapBtn(it.map)+'</div>';
+      return h+'</li>';
+    }).join('');
+  }
+  var SCN=[
+    {id:'pisalucca',scene:'pisa',title:'Piza + Lukka',badge:'W planie',pois:['pisa','lucca'],
+     facts:['25 min do Pizy','Płasko dla wszystkich','Najlepsza pizza w Lukce'],
+     intro:'Lekki, wygodny dzień blisko bazy. Krzywa Wieża i katedralny plac w Pizie, potem renesansowe mury Lukki — 4,2 km płaskiej trasy w koronie murów, idealnej na spacer lub rower z dziećmi.',
+     tl:[{t:'8:00',desc:'Wyjazd z hotelu (25 min do Pizy).',plain:true},
+        {t:'8:25–10:15',place:'Piazza dei Miracoli',stop:true,desc:'Krzywa Wieża, katedra, baptysterium. Sam plac i widok — bezpłatnie; wejście na wieżę wymaga rezerwacji.',map:'Piazza dei Miracoli, Pisa'},
+        {t:'10:45',place:'Mura di Lucca',stop:true,desc:'Mury okrążające starówkę — płasko, można wypożyczyć rowery przy bramach.',map:'Mura di Lucca'},
+        {t:'obiad',place:'Pizzeria da Felice',desc:'Uznawana za najlepszą pizzę w Lukce, ponad 100 lat tradycji.',map:'Pizzeria da Felice Lucca'},
+        {t:'~14:00',desc:'Powrót do Tirrenii (45 min), 19:00 kolacja.',plain:true}]},
+    {id:'firenze',scene:'firenze',title:'Florencja',badge:'W planie',pois:['firenze'],
+     facts:['1 h 15 dojazdu','Dzień całodniowy','Duomo, Uffizi, Ponte Vecchio'],
+     intro:'Kolebka renesansu na cały dzień. Start od panoramy z Piazzale Michelangelo, potem spacer przez samo serce miasta. Bilety do Uffizi lub Galerii Accademia (Dawid) warto zarezerwować wcześniej.',
+     tl:[{t:'8:00–9:15',desc:'Jazda do Florencji (1 h 15 min).',plain:true},
+        {t:'9:15',place:'Piazzale Michelangelo',stop:true,desc:'Panorama całego miasta — rano mniej tłoczno.',map:'Piazzale Michelangelo Firenze'},
+        {t:'11:00–12:30',place:'Duomo · Ponte Vecchio · Signoria',stop:true,desc:'Spacer przez centrum.',map:'Cattedrale di Santa Maria del Fiore Firenze'},
+        {t:'obiad',place:'Trattoria Za Za / Mercato Centrale',desc:'Otwarte cały dzień, szeroki wybór dla dzieci.',map:'Mercato Centrale Firenze'},
+        {t:'13:30–15:30',desc:'Uffizi / Accademia, jeśli zarezerwowane.',plain:true},
+        {t:'15:30',desc:'Powrót (1 h 15 min), 19:00 kolacja.',plain:true}]},
+    {id:'voltsg',scene:'voltsg',title:'Volterra + San Gimignano',badge:'W planie',pois:['volterra','sangimignano'],
+     facts:['1 h 10 dojazdu','Miasto wież','Mistrzowskie lody Dondoli'],
+     intro:'Dwa klejnoty toskańskiego wnętrza. Volterra z etruskimi murami i warsztatami alabastru, potem San Gimignano — słynne miasto wież. Uliczki strome i brukowane, więc oceńcie komfort dla Ali na miejscu.',
+     tl:[{t:'8:00–9:10',desc:'Jazda do Volterry (1 h 10 min).',plain:true},
+        {t:'9:10',place:'Volterra',stop:true,desc:'Rynek, mury etruskie, alabaster.',map:'Volterra'},
+        {t:'11:35',place:'San Gimignano',stop:true,desc:'Piazza della Cisterna, wieże widokowe.',map:'San Gimignano'},
+        {t:'deser',place:'Gelateria Dondoli',desc:'Wielokrotny mistrz świata w lodach.',map:'Gelateria Dondoli San Gimignano'},
+        {t:'~14:15',desc:'Powrót (1 h 15 min), 19:00 kolacja.',plain:true}]},
+    {id:'livorno',scene:'livorno',title:'Livorno + wybrzeże',badge:'Lżejszy dzień',pois:['livorno','castiglioncello'],
+     facts:['20 min dojazdu','Akwarium dla dzieci','Taras nad morzem'],
+     intro:'Najkrótszy dojazd i najwięcej dla dzieci. Akwarium w Livorno i szachownicowy taras Mascagni, potem klify i plaża w Castiglioncello. Resztę popołudnia można spędzić na plaży hotelowej.',
+     tl:[{t:'8:00–8:20',desc:'Jazda do Livorno (20 min).',plain:true},
+        {t:'8:20',place:'Acquario di Livorno',stop:true,desc:'Akwarium + Terrazza Mascagni. Otwarte 10:00–18:00.',map:'Acquario di Livorno'},
+        {t:'11:30',place:'Castiglioncello',stop:true,desc:'Klify, plaża, spacer.',map:'Castiglioncello'},
+        {t:'~14:30',desc:'Powrót do Tirrenii, plaża hotelowa.',plain:true}]}
+  ];
+  var PROP=[
+    {id:'siena',scene:'siena',title:'Siena',badge:'Propozycja',pois:['siena'],
+     facts:['~1 h 40 dojazdu','Piazza del Campo','Katedra z marmurową posadzką'],
+     intro:'Jedno z najpiękniejszych miast Włoch. Muszlowaty Piazza del Campo (wstęp wolny) to naturalny plac dla dzieci, a katedra latem odsłania słynną marmurową posadzkę. Uliczki strome, ale zwarte — całość obchodzi się pieszo w kilka godzin.',
+     tl:[{t:'8:30–10:10',desc:'Jazda do Sieny (~1 h 40).',plain:true},
+        {t:'10:10',place:'Piazza del Campo',stop:true,desc:'Muszlowy plac, Palazzo Pubblico i wieża Torre del Mangia.',map:'Piazza del Campo Siena'},
+        {t:'11:30',place:'Duomo di Siena',stop:true,desc:'Katedra z odkrytą posadzką (bilet OPA SI Pass).',map:'Duomo di Siena'},
+        {t:'obiad',place:'Trattorie w centrum',desc:'Pici, dania toskańskie, opcje dla dzieci.',map:'Siena centro'},
+        {t:'~15:30',desc:'Powrót (~1 h 40), na kolację ~17:10.',plain:true}]},
+    {id:'cinqueterre',scene:'cinque',title:'Cinque Terre',badge:'Propozycja',pois:['cinqueterre'],
+     facts:['~1 h 30 do La Spezia','Zwiedzanie pociągiem','Kąpiel w Monterosso'],
+     intro:'Pięć kolorowych wiosek zawieszonych na klifie, spiętych koleją. Auta zostawiacie w La Spezia i przesiadacie się na Cinque Terre Express, który kursuje między wioskami co kilkanaście minut — bez parkowania i stromych podjazdów. Karta parku (Treno MS) obejmuje nielimitowane przejazdy.',
+     tl:[{t:'8:00–9:30',desc:'Jazda do La Spezia (~1 h 30), parking przy dworcu.',plain:true},
+        {t:'9:30',place:'La Spezia — Cinque Terre Card',stop:true,desc:'Kupujecie kartę (pociąg + ścieżki) na stacji lub online.',map:'Stazione La Spezia Centrale'},
+        {t:'10:00',place:'Riomaggiore → Manarola',stop:true,desc:'Pierwsze dwie wioski, widoki na klify i port.',map:'Riomaggiore'},
+        {t:'obiad',place:'Vernazza',desc:'Najbardziej malownicza wioska, obiad przy porcie.',map:'Vernazza'},
+        {t:'14:00',place:'Monterosso al Mare',stop:true,desc:'Jedyna z szeroką plażą — czas na kąpiel.',map:'Monterosso al Mare'},
+        {t:'~16:30',desc:'Pociąg do La Spezia, powrót autem (~1 h 30).',plain:true}]},
+    {id:'pienza',scene:'pienza',title:'Pienza & Val d’Orcia',badge:'Propozycja',pois:['pienza'],
+     facts:['~2 h 20 dojazdu','UNESCO','Plener „Gladiatora”'],
+     intro:'Najdalszy, ale wyjątkowy kierunek — pełny dzień. Pienza to modelowe renesansowe miasteczko z widokami na dolinę, a droga Terrapille tuż za miastem to miejsce, gdzie Ridley Scott kręcił pola z „Gladiatora”. Pole jest prywatne — podziwiamy je od strony drogi i parkingu.',
+     tl:[{t:'8:00–10:20',desc:'Jazda do Pienzy (~2 h 20).',plain:true},
+        {t:'10:20',place:'Pienza — starówka',stop:true,desc:'Renesansowy układ, tarasy widokowe, słynny pecorino.',map:'Pienza'},
+        {t:'12:00',place:'Droga Terrapille („Gladiator”)',stop:true,desc:'Cyprysy i faliste wzgórza z filmu — widok od drogi.',map:'Podere Terrapille Pienza'},
+        {t:'obiad',place:'Pienza / San Quirico',desc:'Toskańska kuchnia, pecorino di Pienza.',map:'San Quirico d Orcia'},
+        {t:'~15:00',desc:'Powrót (~2 h 20), na kolację ~17:20.',plain:true}]}
+  ];
+  function dayOptions(sel){
+    return CAL.filter(function(c){return c[3]!=='road';}).map(function(c){
+      return '<option value="'+c[0]+'"'+(c[0]===sel?' selected':'')+'>'+c[0]+' ('+c[1]+')</option>';
+    }).join('');
+  }
+  function scnCard(s,defaultDay){
+    var h='<div class="scn"><div class="scn-banner">'+scene(s.scene)+
+      '<span class="badge">'+s.badge+'</span>'+
+      '<div class="cap"><h3>'+s.title+'</h3><div class="sub">'+s.pois.map(function(p){return POI[p].name;}).join(' + ')+'</div></div></div>'+
+      '<div class="scn-body"><div class="facts">'+s.facts.map(function(f){return '<span class="fact"><svg class="ic"><use href="#i-clock"/></svg>'+f+'</span>';}).join('')+'</div>'+
+      '<p>'+s.intro+'</p>'+
+      '<ul class="tl">'+tlItems(s.tl)+'</ul>'+
+      '<div class="addbar"><label>Wstaw do dnia:</label>'+
+      '<select class="day-pick" data-scn="'+s.id+'">'+dayOptions(defaultDay)+'</select>'+
+      '<button class="btn btn-sea btn-sm" data-act="addscn" data-scn="'+s.id+'"><svg class="ic" style="width:14px;height:14px"><use href="#i-check"/></svg>Dodaj do planu</button></div>'+
+      '</div></div>';
+    return h;
+  }
+  var ALLSCN={}; SCN.concat(PROP).forEach(function(s){ ALLSCN[s.id]=s; });
+  document.getElementById('catCore').innerHTML = SCN.map(function(s,i){ return scnCard(s,['27.07','29.07','31.07','02.08'][i]||'27.07'); }).join('');
+  document.getElementById('catProp').innerHTML = PROP.map(function(s){ return scnCard(s,'28.07'); }).join('');
+
+  function bindCatalog(elId){
+    document.getElementById(elId).addEventListener('click',function(e){
+      var b=e.target.closest('[data-act="addscn"]'); if(!b) return;
+      var s=ALLSCN[b.dataset.scn];
+      var sel=b.parentNode.querySelector('.day-pick'); var day=sel.value;
+      plan[day]=s.pois.slice(); persist();
+      openDay=day; renderPlan(); showTab('plan');
+      window.scrollTo({top:0,behavior:'smooth'});
+      setTimeout(function(){ var el=planDays.querySelector('.pday.open'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },260);
+    });
+  }
+  bindCatalog('catCore'); bindCatalog('catProp');
+
+  /* ---------- Tickets ---------- */
+  var TK=[
+    {name:'Krzywa Wieża w Pizie',where:'Piazza dei Miracoli',price:'~20 €',url:'https://www.opapisa.it/en/tickets/buy/',
+     note:'Sloty co 30 min — rezerwuj online z konkretną godziną (do 90 dni wcześniej). Dzieci <8 lat nie wchodzą (Ala jako 8-latka może). Osoba z niepełnosprawnością + 1 opiekun — <b>bezpłatnie</b>. Latem otwarte do 22:30.',tag:['book','Trzeba rezerwować']},
+    {name:'Bazylika św. Marka',where:'Wenecja',price:'gratis',url:'https://www.basilicasanmarco.it/',
+     note:'Wejście tylko z rezerwacją online. Przy napiętym planie proponujemy zostać na zewnątrz. Strój: zakryte ramiona i kolana.',tag:['free','Wstęp wolny z rezerwacją']},
+    {name:'Galeria Uffizi',where:'Florencja',price:'bilet + 4 €',url:'https://tickets.uffizi.it/',
+     note:'Oficjalna kasa online. Do ceny doliczana opłata rezerwacyjna 4 €. Rezerwuj dzień i godzinę.',tag:['book','Warto rezerwować']},
+    {name:'Galleria dell’Accademia (Dawid)',where:'Florencja',price:'bilet + 4 €',url:'https://www.galleriaaccademiafirenze.it/en/',
+     note:'Dom słynnego Dawida Michała Anioła. Bilet z rezerwacją dnia i godziny.',tag:['book','Warto rezerwować']},
+    {name:'Acquario di Livorno',where:'Livorno',price:'~18 € / ~13 € dz.',url:'https://www.acquariodilivorno.it/',
+     note:'Akwarium przy Terrazza Mascagni. Otwarte 10:00–18:00. Świetne dla dzieci.',tag:['info','Bilet na miejscu lub online']},
+    {name:'OPA SI Pass — Duomo Siena',where:'Siena · propozycja',price:'~16 €',url:'https://operaduomo.siena.it/en/',
+     note:'Katedra z odsłoniętą marmurową posadzką (27.06–31.07 i 18.08–15.10). Piazza del Campo — za darmo.',tag:['info','Jeśli dodacie Sienę']},
+    {name:'Cinque Terre Card (Treno MS)',where:'La Spezia · propozycja',price:'od ~19,50 €/dzień',url:'https://card.parconazionale5terre.it/',
+     note:'Nielimitowane przejazdy pociągiem Levanto–La Spezia + ścieżki + autobusy. Pociągi 14.03–01.11.2026.',tag:['info','Jeśli dodacie Cinque Terre']}
+  ];
+  document.getElementById('tickets').innerHTML = TK.map(function(t){
+    return '<div class="card tk"><div class="tk-top"><div><h3>'+t.name+'</h3><div class="where">'+t.where+'</div></div><div class="price">'+t.price+'</div></div>'+
+      '<div class="chips"><span class="chip '+t.tag[0]+'"><svg class="ic" style="width:13px;height:13px"><use href="#'+(t.tag[0]==='free'?'i-star':'i-ticket')+'"/></svg>'+t.tag[1]+'</span></div>'+
+      '<p>'+t.note+'</p>'+
+      '<div class="btnrow"><a class="btn btn-sea" target="_blank" rel="noopener" href="'+t.url+'"><svg class="ic"><use href="#i-ticket"/></svg>Oficjalna kasa</a></div></div>';
+  }).join('');
+
+  /* ---------- Ice cream ---------- */
+  var IC=[
+    ['Marina di Pisa','~10–15 min','Nadmorska dzielnica Pizy — molo, kolorowe domki, lodziarnie nad wodą.','Marina di Pisa'],
+    ['Terrazza Mascagni, Livorno','~15–20 min','Szachownicowy taras nad morzem, świetny na zachód słońca.','Terrazza Mascagni Livorno'],
+    ['San Piero a Grado','~15 min','Kameralne miasteczko ze starożytną bazyliką, spacer bez tłumów.','San Piero a Grado'],
+    ['Antignano, Livorno','~20 min','Klimat wioski rybackiej — kolorowe łódki, lody z widokiem na morze.','Antignano Livorno'],
+    ['Viareggio','~30 min','Promenada w stylu liberty, wesołe miasteczko, mnóstwo lodziarni.','Viareggio']
+  ];
+  document.getElementById('icecream').innerHTML = IC.map(function(p){
+    return '<div class="card"><div class="tk-top"><div><h3 style="font-size:17px">'+p[0]+'</h3></div>'+
+      '<span class="fact"><svg class="ic" style="width:13px;height:13px"><use href="#i-route"/></svg>'+p[1]+'</span></div>'+
+      '<p style="margin:6px 0 0;font-size:14px;color:var(--muted)">'+p[2]+'</p>'+
+      '<div class="btnrow">'+mapBtn(p[3])+'</div></div>';
+  }).join('');
+
+  /* ---------- Cost calculator (day-based) ---------- */
+  var CKEY='wlochy2026-cost-v1';
+  var mealRates={
+    wyc:{W:200,K:175,label:'Dni wycieczkowe',sub:'obiad + lody + napoje w drodze'},
+    hotel:{W:110,K:100,label:'Dni hotelowe (obiad na mieście)',sub:'hotel = tylko śniadanie i obiadokolacja'},
+    droga:{W:80,K:72,label:'Dni w podróży (PL↔Włochy)',sub:'jedzenie w trasie / prowiant'}
+  };
+  var mealOrder=['wyc','hotel','droga'];
+  var tkOpts=[
+    {id:'wieza',label:'Krzywa Wieża w Pizie',sub:'6 biletów ~20 € (Ala + opiekun gratis)',W:40,K:80},
+    {id:'acquario',label:'Acquario di Livorno',sub:'~62 € / rodzinę',W:62,K:62},
+    {id:'siena',label:'Siena — OPA SI Pass',sub:'~16 €/os., dzieci taniej',W:48,K:64},
+    {id:'cinque',label:'Cinque Terre Card',sub:'pociąg + ścieżki, ~1 dzień',W:70,K:64}
+  ];
+  var tolls={W:160,K:160};
+  var cost={counts:{wyc:4,hotel:6,droga:4},tk:{wieza:true,acquario:true,siena:false,cinque:false}};
+  try{ var cs=localStorage.getItem(CKEY); if(cs){ var p=JSON.parse(cs); if(p&&p.counts) cost=p; } }catch(e){}
+
+  var stepsWrap=document.getElementById('steps'), tgWrap=document.getElementById('toggles');
+  stepsWrap.innerHTML=mealOrder.map(function(k){ var r=mealRates[k];
+    return '<div class="step"><div class="lab">'+r.label+'<small>'+r.sub+'</small></div>'+
+      '<div class="rate">W '+r.W+' €/dz<br>K '+r.K+' €/dz</div>'+
+      '<div class="stepper"><button type="button" data-k="'+k+'" data-d="-1" aria-label="Mniej dni">−</button>'+
+      '<span class="val" id="v-'+k+'">'+cost.counts[k]+'</span>'+
+      '<button type="button" data-k="'+k+'" data-d="1" aria-label="Więcej dni">+</button></div></div>';
+  }).join('');
+  tgWrap.innerHTML=tkOpts.map(function(o){
+    return '<label class="tg"><input type="checkbox" data-id="'+o.id+'"'+(cost.tk[o.id]?' checked':'')+'>'+
+      '<span class="lab">'+o.label+'<small>'+o.sub+'</small></span>'+
+      '<span class="amt">W ~'+o.W+' € · K ~'+o.K+' €</span></label>';
+  }).join('');
+
+  function recalc(){
+    var fW=0,fK=0;
+    mealOrder.forEach(function(k){ fW+=cost.counts[k]*mealRates[k].W; fK+=cost.counts[k]*mealRates[k].K; });
+    var tW=0,tK=0;
+    tkOpts.forEach(function(o){ if(cost.tk[o.id]){ tW+=o.W; tK+=o.K; } });
+    var W=fW+tW+tolls.W, K=fK+tK+tolls.K;
+    document.getElementById('totW').textContent='~'+W+' €';
+    document.getElementById('totK').textContent='~'+K+' €';
+    document.getElementById('totAll').textContent='~'+(W+K)+' €';
+    var days=cost.counts.wyc+cost.counts.hotel+cost.counts.droga;
+    document.getElementById('foodSub').innerHTML='Samo jedzenie: <b>Wyszyniaki ~'+fW+' €</b> · <b>Kowaliki ~'+fK+' €</b> — '+days+' dni z obiadem poza hotelem.';
+    try{ localStorage.setItem(CKEY,JSON.stringify(cost)); }catch(e){}
+  }
+  stepsWrap.addEventListener('click',function(e){ var b=e.target.closest('button[data-k]'); if(!b) return;
+    var k=b.dataset.k, d=+b.dataset.d; cost.counts[k]=Math.max(0,Math.min(14,cost.counts[k]+d));
+    document.getElementById('v-'+k).textContent=cost.counts[k]; recalc(); });
+  tgWrap.addEventListener('change',function(e){ var cb=e.target.closest('input[data-id]'); if(!cb) return;
+    cost.tk[cb.dataset.id]=cb.checked; recalc(); });
+  recalc();
+
+  /* ---------- Wishlist ---------- */
+  var wish=document.getElementById('wish'), WKEY='wlochy2026-wishlist';
+  try{ var sv=localStorage.getItem(WKEY); if(sv) wish.value=sv; }catch(e){}
+  document.getElementById('saveWish').addEventListener('click',function(){
+    try{ localStorage.setItem(WKEY,wish.value); }catch(e){}
+    var m=document.getElementById('savedMsg'); m.classList.add('show'); setTimeout(function(){ m.classList.remove('show'); },1600);
+  });
+})();
+</script>
+
+</body>
+</html>
