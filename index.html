@@ -318,6 +318,51 @@
   .saved{font-size:12.5px;color:var(--olive);font-weight:600;opacity:0;transition:opacity .2s}
   .saved.show{opacity:1}
 
+  /* live expenses */
+  .exp-sum{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:2px 0 14px}
+  .exp-tile{background:var(--inset);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+  .exp-tile .nm{font-size:12.5px;font-weight:700;color:var(--muted)}
+  .exp-tile .sp{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--terra);
+    font-variant-numeric:tabular-nums;line-height:1.1;margin-top:2px}
+  .exp-tile .bd{font-size:11.5px;color:var(--faint);font-variant-numeric:tabular-nums;margin-top:1px}
+  .exp-bar{height:6px;border-radius:999px;background:var(--line);margin-top:7px;overflow:hidden}
+  .exp-bar i{display:block;height:100%;background:var(--sea);border-radius:999px;transition:width .25s}
+  .exp-bar.over i{background:var(--terra)}
+  .exp-fam{display:flex;gap:6px;margin-bottom:10px}
+  .fambtn{flex:1;padding:9px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);
+    font-weight:700;font-size:13.5px;color:var(--muted);cursor:pointer;transition:background .12s,color .12s}
+  .fambtn.on{background:var(--sea);border-color:var(--sea);color:#FBF6E9}
+  .exp-row{display:flex;gap:8px}
+  .exp-amt{flex:1;display:flex;align-items:center;background:var(--surface);border:1px solid var(--line);
+    border-radius:10px;padding:0 12px;transition:border-color .15s}
+  .exp-amt .cur{font-family:var(--serif);font-size:18px;color:var(--faint);font-weight:600}
+  .exp-amt input{flex:1;border:none;background:none;font:inherit;font-size:20px;font-weight:700;
+    font-variant-numeric:tabular-nums;color:var(--ink);padding:10px 6px;outline:none;width:100%;min-width:0}
+  #expCat,#expNote,#expDate{width:100%;font:inherit;font-size:14px;padding:10px 12px;border-radius:10px;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink);margin-top:8px}
+  #expCat{cursor:pointer;flex:0 0 auto;width:auto;margin-top:0}
+  #expNote:focus,#expDate:focus,#expCat:focus{outline:2px solid var(--sea);outline-offset:1px}
+  .exp-list{margin-top:16px}
+  .exp-daygrp{margin-bottom:14px}
+  .exp-dayhd{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.06em;color:var(--faint);padding:0 2px 6px;
+    border-bottom:1px solid var(--line);margin-bottom:4px}
+  .exp-dayhd .dt{font-variant-numeric:tabular-nums;color:var(--muted)}
+  .exp-item{display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px solid var(--inset)}
+  .exp-item:last-child{border-bottom:none}
+  .exp-item .famtag{flex:0 0 auto;font-size:10.5px;font-weight:700;padding:3px 7px;border-radius:999px}
+  .exp-item .famtag.W{background:var(--sea-soft);color:var(--sea-deep)}
+  .exp-item .famtag.K{background:var(--sole-soft);color:var(--sole)}
+  .exp-item .info{flex:1;min-width:0}
+  .exp-item .info b{font-size:14px;font-weight:600;display:block;line-height:1.25}
+  .exp-item .info small{font-size:12px;color:var(--faint);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .exp-item .val{flex:0 0 auto;font-variant-numeric:tabular-nums;font-weight:700;font-size:15px;color:var(--ink)}
+  .exp-item .del{flex:0 0 auto;width:26px;height:26px;border-radius:7px;border:1px solid var(--line);
+    background:var(--surface);color:var(--faint);cursor:pointer;display:grid;place-items:center}
+  .exp-item .del:hover{color:var(--terra);border-color:var(--terra)}
+  .exp-empty{text-align:center;color:var(--muted);font-size:13.5px;padding:12px 0 4px}
+  .exp-tools{display:flex;justify-content:flex-end;margin-top:8px}
+
   .foot{margin-top:22px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
   .foot b{color:var(--muted)}
 
@@ -466,7 +511,32 @@
     </div>
     <p class="grand">Razem grupa: <b id="totAll">–</b> · cały wyjazd</p>
 
-    <h3 style="font-size:16px;margin:18px 0 8px">Wyżywienie poza hotelem</h3>
+    <div class="card" id="expCard" style="margin-top:18px">
+      <div class="kicker" style="color:var(--terra)">Na bieżąco</div>
+      <h3 style="font-size:18px;margin:4px 0 2px">Ile naprawdę wydajemy</h3>
+      <p style="font-size:13.5px;color:var(--muted);margin:4px 0 12px">Dodawaj wydatki w euro w trakcie wyjazdu — osobno dla każdej rodziny. Wszystko zapisuje się na tym urządzeniu.</p>
+
+      <div class="exp-sum" id="expSum"></div>
+
+      <div class="exp-fam" id="expFam">
+        <button type="button" class="fambtn on" data-fam="W">Wyszyniaki</button>
+        <button type="button" class="fambtn" data-fam="K">Kowaliki</button>
+      </div>
+      <div class="exp-row">
+        <div class="exp-amt"><span class="cur">€</span><input id="expAmt" type="text" inputmode="decimal" placeholder="0,00" aria-label="Kwota w euro"></div>
+        <select id="expCat" aria-label="Kategoria"></select>
+      </div>
+      <input id="expNote" type="text" placeholder="Opis (opcjonalnie) — np. obiad w Lukce" aria-label="Opis wydatku">
+      <input id="expDate" type="date" aria-label="Data wydatku">
+      <div class="btnrow">
+        <button class="btn btn-sea" type="button" id="expAdd"><svg class="ic"><use href="#i-check"/></svg>Dodaj wydatek</button>
+      </div>
+
+      <div class="exp-list" id="expList"></div>
+      <div class="note"><svg class="ic"><use href="#i-info"/></svg><span>Kwotę wpisujesz ręcznie w euro i przypisujesz do rodziny. Dane są tylko na tym telefonie (nie synchronizują się między osobami).</span></div>
+    </div>
+
+    <h3 style="font-size:16px;margin:22px 0 8px">Plan budżetu — wyżywienie poza hotelem</h3>
     <div id="steps"></div>
     <p class="grand" style="text-align:left;margin:6px 2px 0;font-size:12.5px" id="foodSub"></p>
 
@@ -536,6 +606,31 @@
     ['05.08','śr','Graz → Polska','road']
   ];
   var EDITABLE={}; CAL.forEach(function(d,i){ if(d[3]!=='road') EDITABLE[d[0]]=true; });
+
+  /* ---------- Rozpisane dni przejazdowe ---------- */
+  var ROADINFO={
+    '24.07':{
+      badge:'Wenecja po drodze',
+      intro:'Dwa długie przejazdy i krótki przystanek w Wenecji. Klucz: wyjazd z Graz ~8:00 i wyjazd z Wenecji najpóźniej ~15:30, żeby zdążyć na kolację w Tirrenii o 20:10.',
+      steps:[
+        {clk:'8:00',cls:'drive',txt:'<b>Wyjazd z Graz</b> (JUFA) po śniadaniu — nawigacja na Venezia → <b>Tronchetto</b>'},
+        {clk:'12:15',cls:'drive',txt:'Dojazd i <b>parking Tronchetto</b> (~4 h drogi). Na wyspę: People Mover ~1,5 € lub vaporetto'},
+        {clk:'13:00',cls:'visit',txt:'<b>Canal Grande</b> vaporettem (linia 2) do <b>San Marco</b> — zwiedzanie „na siedząco”'},
+        {clk:'13:45',cls:'lunch',txt:'<b>Obiad + lody</b> (kawałek od placu taniej niż przy San Marco)'},
+        {clk:'14:30',cls:'visit',txt:'<b>Piazza San Marco</b> — plac bez schodów, bazylika i Pałac Dożów z zewnątrz, gołębie; powrót vaporettem'},
+        {clk:'15:30',cls:'drive',txt:'<b>⚠ Wyjazd z Wenecji</b> — ostateczny limit 15:45'},
+        {clk:'19:50',cls:'drive',txt:'Przejazd A4 → A1 (Apeniny) → A11 do <b>Tirrenii</b>, jeden postój ~20 min'},
+        {clk:'20:10',cls:'visit',txt:'<b>Tirrenia</b> — zameldowanie i obiadokolacja'}
+      ],
+      parkQ:'Interparking Venezia Tronchetto',
+      parkLabel:'Parking Tronchetto w Google Maps',
+      notes:[
+        {warn:true,html:'<b>Na wyspy nie wjedziecie autem</b> — most z lądu kończy się na Tronchetto / Piazzale Roma, dalej wszystko pieszo lub łodzią. Z wózkiem i z Alą trzymajcie się trasy vaporetto + San Marco (płasko, bez schodów).'},
+        {warn:true,html:'<b>Opłata wjazdowa do Wenecji</b> (~5–10 €/os.) obowiązuje w wybrane dni, głównie piątki–niedziele w sezonie — a 24.07 to piątek. Dzieci do 14 lat zwolnione. Sprawdźcie i kupcie online przed wyjazdem (cda.ve.it).'},
+        {warn:false,html:'Pacifica na LPG — zatankujcie gaz jeszcze w Austrii lub na wjeździe do Włoch. Uprzedźcie hotel o przyjeździe ~20:10 i dopytajcie, do której serwują kolację.'}
+      ]
+    }
+  };
 
   /* ---------- POIs (base = Tirrenia) ---------- */
   var BASE={name:'Tirrenia (baza)', lat:43.605, lon:10.283, q:'TH Tirrenia Green Park Resort, Calambrone'};
@@ -633,7 +728,8 @@
   /* ---------- Render plan ---------- */
   var planDays=document.getElementById('planDays');
   function dayStatus(dateKey,type){
-    if(type==='road') return {txt:CAL.find(function(c){return c[0]===dateKey;})[2], pill:''};
+    if(type==='road'){ var rtxt=CAL.find(function(c){return c[0]===dateKey;})[2];
+      return {txt:rtxt, pill: ROADINFO[dateKey]? '<span class="pill ok">'+ROADINFO[dateKey].badge+'</span>':''}; }
     var stops=plan[dateKey]||[];
     if(!stops.length) return {txt:'Dzień w hotelu — plaża, basen, relaks', pill:''};
     var r=schedule(stops);
@@ -710,19 +806,36 @@
        '<button class="btn btn-ghost" data-act="clear" data-day="'+dateKey+'"><svg class="ic"><use href="#i-x"/></svg>Wyczyść dzień</button></div>';
     return h;
   }
+  function roadInfoHTML(dateKey){
+    var info=ROADINFO[dateKey]; if(!info) return '';
+    var h='';
+    h+='<div class="assume"><svg class="ic"><use href="#i-clock"/></svg><span>'+info.intro+'</span></div>';
+    h+='<div class="pick-title">Plan godzinowy</div><ul class="sched">';
+    info.steps.forEach(function(s){
+      h+='<li class="'+s.cls+'"><span class="clk">'+s.clk+'</span><span class="marker"><i></i></span><span class="txt">'+s.txt+'</span></li>';
+    });
+    h+='</ul>';
+    if(info.parkQ){
+      h+='<div class="btnrow" style="margin-top:12px"><a class="btn btn-sea" target="_blank" rel="noopener" href="'+pinUrl(info.parkQ)+'"><svg class="ic"><use href="#i-pin"/></svg>'+info.parkLabel+'</a></div>';
+    }
+    info.notes.forEach(function(n){
+      h+='<div class="note'+(n.warn?' warn':'')+'"><svg class="ic"><use href="#'+(n.warn?'i-warn':'i-info')+'"/></svg><span>'+n.html+'</span></div>';
+    });
+    return h;
+  }
   function renderPlan(){
     var h='';
     CAL.forEach(function(d){
-      var dateKey=d[0], type=d[3], editable=type!=='road';
+      var dateKey=d[0], type=d[3], editable=type!=='road', hasInfo=!!ROADINFO[dateKey], expandable=editable||hasInfo;
       var st=dayStatus(dateKey,type), isOpen=openDay===dateKey;
       h+='<div class="pday '+ (type==='road'?'road':(plan[dateKey]&&plan[dateKey].length?'trip':'rest')) +(isOpen?' open':'')+'">';
-      h+='<button class="pday-head" '+(editable?'data-act="toggle" data-day="'+dateKey+'"':'disabled style="cursor:default"')+'>';
+      h+='<button class="pday-head" '+(expandable?'data-act="toggle" data-day="'+dateKey+'"':'disabled style="cursor:default"')+'>';
       h+='<span class="pday-date">'+dateKey+'<small>'+d[1]+'</small></span>';
       h+='<span class="pday-mid"><span class="pday-title">'+(editable?(plan[dateKey]&&plan[dateKey].length?'Wycieczka':'Dzień wolny'):d[2])+'</span>';
       h+='<span class="pday-status">'+st.txt+' '+(st.pill||'')+'</span></span>';
-      if(editable) h+='<span class="pday-caret"><svg class="ic"><use href="#i-caret"/></svg></span>';
+      if(expandable) h+='<span class="pday-caret"><svg class="ic"><use href="#i-caret"/></svg></span>';
       h+='</button>';
-      if(editable && isOpen){ h+='<div class="pday-body">'+editorHTML(dateKey)+'</div>'; }
+      if(isOpen && expandable){ h+='<div class="pday-body">'+(editable?editorHTML(dateKey):roadInfoHTML(dateKey))+'</div>'; }
       h+='</div>';
     });
     planDays.innerHTML=h;
@@ -928,6 +1041,7 @@
     {id:'cinque',label:'Cinque Terre Card',sub:'pociąg + ścieżki, ~1 dzień',W:70,K:64}
   ];
   var tolls={W:160,K:160};
+  var lastBudget={W:0,K:0};
   var cost={counts:{wyc:4,hotel:6,droga:4},tk:{wieza:true,acquario:true,siena:false,cinque:false}};
   try{ var cs=localStorage.getItem(CKEY); if(cs){ var p=JSON.parse(cs); if(p&&p.counts) cost=p; } }catch(e){}
 
@@ -956,6 +1070,8 @@
     document.getElementById('totAll').textContent='~'+(W+K)+' €';
     var days=cost.counts.wyc+cost.counts.hotel+cost.counts.droga;
     document.getElementById('foodSub').innerHTML='Samo jedzenie: <b>Wyszyniaki ~'+fW+' €</b> · <b>Kowaliki ~'+fK+' €</b> — '+days+' dni z obiadem poza hotelem.';
+    lastBudget.W=W; lastBudget.K=K;
+    if(typeof renderExpSum==='function' && Array.isArray(expenses)) renderExpSum();
     try{ localStorage.setItem(CKEY,JSON.stringify(cost)); }catch(e){}
   }
   stepsWrap.addEventListener('click',function(e){ var b=e.target.closest('button[data-k]'); if(!b) return;
@@ -964,6 +1080,83 @@
   tgWrap.addEventListener('change',function(e){ var cb=e.target.closest('input[data-id]'); if(!cb) return;
     cost.tk[cb.dataset.id]=cb.checked; recalc(); });
   recalc();
+
+  /* ---------- Live expenses (actual spend) ---------- */
+  var CATS={food:'🍽️ Jedzenie',gelato:'🍦 Lody',tickets:'🎟️ Bilety',fuel:'⛽ Paliwo',shop:'🛍️ Zakupy',parking:'🅿️ Parking',other:'📌 Inne'};
+  var EKEY='wlochy2026-expenses-v1';
+  var expenses=[];
+  try{ var es=localStorage.getItem(EKEY); if(es){ var pe=JSON.parse(es); if(Array.isArray(pe)) expenses=pe; } }catch(e){}
+  var expFam='W', expId=0;
+  expenses.forEach(function(x){ if(typeof x.id==='number' && x.id>=expId) expId=x.id+1; });
+
+  var famBtns=document.getElementById('expFam');
+  var amtEl=document.getElementById('expAmt'), catEl=document.getElementById('expCat'),
+      noteEl=document.getElementById('expNote'), dateEl=document.getElementById('expDate'),
+      listEl=document.getElementById('expList'), sumEl=document.getElementById('expSum');
+
+  catEl.innerHTML=Object.keys(CATS).map(function(k){ return '<option value="'+k+'">'+CATS[k]+'</option>'; }).join('');
+  (function(){ var d=new Date(); dateEl.value=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); })();
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function eur(n){ n=Math.round(n*100)/100; return (n%1===0)? n.toFixed(0) : n.toFixed(2).replace('.',','); }
+  function famName(f){ return f==='W'?'Wyszyniaki':'Kowaliki'; }
+  function fmtDate(s){ var p=(s||'').split('-'); return p.length===3? p[2]+'.'+p[1] : (s||'—'); }
+  function saveExp(){ try{ localStorage.setItem(EKEY,JSON.stringify(expenses)); return true; }catch(e){ return false; } }
+
+  famBtns.addEventListener('click',function(e){ var b=e.target.closest('.fambtn'); if(!b) return;
+    expFam=b.dataset.fam;
+    [].forEach.call(famBtns.children,function(x){ x.classList.toggle('on',x.dataset.fam===expFam); });
+  });
+
+  document.getElementById('expAdd').addEventListener('click',function(){
+    var v=parseFloat(String(amtEl.value||'').replace(',','.'));
+    if(!(v>0)){ amtEl.focus(); var box=amtEl.parentNode; box.style.borderColor='var(--terra)';
+      setTimeout(function(){ box.style.borderColor=''; },1200); return; }
+    var item={id:expId++, fam:expFam, amt:Math.round(v*100)/100, cat:catEl.value, note:noteEl.value.trim(), date:dateEl.value};
+    expenses.push(item);
+    if(!saveExp()){ expenses.pop(); alert('Nie udało się zapisać — pamięć urządzenia jest pełna. Usuń kilka starszych wydatków.'); return; }
+    amtEl.value=''; noteEl.value=''; amtEl.focus(); renderExp();
+  });
+  amtEl.addEventListener('keydown',function(e){ if(e.key==='Enter'){ document.getElementById('expAdd').click(); } });
+
+  function renderExpSum(){
+    var sW=0,sK=0; expenses.forEach(function(x){ if(x.fam==='K') sK+=x.amt; else sW+=x.amt; });
+    function tile(f,sp,bd){
+      var pct=bd>0?Math.min(100,Math.round(sp/bd*100)):0, over=bd>0&&sp>bd;
+      return '<div class="exp-tile"><div class="nm">'+famName(f)+'</div>'+
+        '<div class="sp">'+eur(sp)+' €</div>'+
+        '<div class="bd">z budżetu ~'+eur(bd)+' €'+(bd>0?' · '+(over?'przekroczony':pct+'%'):'')+'</div>'+
+        '<div class="exp-bar'+(over?' over':'')+'"><i style="width:'+pct+'%"></i></div></div>';
+    }
+    sumEl.innerHTML=tile('W',sW,lastBudget.W)+tile('K',sK,lastBudget.K);
+  }
+  function renderExp(){
+    renderExpSum();
+    if(!expenses.length){ listEl.innerHTML='<div class="exp-empty">Nie ma jeszcze żadnych wydatków. Dodaj pierwszy powyżej.</div>'; return; }
+    var groups={}; expenses.forEach(function(x){ (groups[x.date]=groups[x.date]||[]).push(x); });
+    var dates=Object.keys(groups).sort().reverse(), h='';
+    dates.forEach(function(d){
+      var items=groups[d], dayTot=0; items.forEach(function(x){ dayTot+=x.amt; });
+      h+='<div class="exp-daygrp"><div class="exp-dayhd"><span class="dt">'+fmtDate(d)+'</span><span>razem '+eur(dayTot)+' €</span></div>';
+      items.slice().reverse().forEach(function(x){
+        h+='<div class="exp-item"><span class="famtag '+(x.fam==='K'?'K':'W')+'">'+(x.fam==='K'?'K':'W')+'</span>'+
+           '<span class="info"><b>'+(CATS[x.cat]||'📌 Inne')+'</b>'+(x.note?'<small>'+esc(x.note)+'</small>':'')+'</span>'+
+           '<span class="val">'+eur(x.amt)+' €</span>'+
+           '<button class="del" type="button" data-del="'+x.id+'" aria-label="Usuń wydatek"><svg class="ic" style="width:14px;height:14px"><use href="#i-x"/></svg></button></div>';
+      });
+      h+='</div>';
+    });
+    h+='<div class="exp-tools"><button class="btn btn-sm btn-ghost" type="button" id="expClear">Wyczyść wszystkie wydatki</button></div>';
+    listEl.innerHTML=h;
+  }
+
+  listEl.addEventListener('click',function(e){
+    var del=e.target.closest('[data-del]');
+    if(del){ var id=+del.dataset.del; expenses=expenses.filter(function(x){ return x.id!==id; }); saveExp(); renderExp(); return; }
+    if(e.target.id==='expClear'){ if(window.confirm('Usunąć wszystkie zapisane wydatki? Tej operacji nie da się cofnąć.')){ expenses=[]; saveExp(); renderExp(); } return; }
+  });
+
+  renderExp();
 
   /* ---------- Wishlist ---------- */
   var wish=document.getElementById('wish'), WKEY='wlochy2026-wishlist';
