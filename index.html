@@ -188,6 +188,22 @@
   .poi .pn small{font-size:11.5px;color:var(--faint)}
   .poi .pmeta{font-size:11px;color:var(--muted);font-weight:600;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
   .poi input:checked ~ .pn b{color:var(--sea-deep)}
+  .poi.off{opacity:.55}
+  .poi.off input{cursor:not-allowed}
+  .poi-flag{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--inset);
+    color:var(--faint);white-space:nowrap;align-self:center;text-align:center;line-height:1.25}
+  .poi-flag.done{background:var(--good-soft);color:var(--good)}
+  .pday.past{opacity:.62}
+  .pday.past .pday-title{color:var(--muted)}
+  .pill.done{background:var(--inset);color:var(--faint)}
+  .reccard{background:var(--warn-soft);border-radius:14px;padding:14px;margin-bottom:14px}
+  .rec-hd{display:flex;align-items:center;gap:8px;color:var(--warnc);font-family:var(--serif);font-size:16px;font-weight:600}
+  .rec-hd .ic{width:18px;height:18px;flex:0 0 auto}
+  .rec-q{font-size:13px;color:var(--ink);margin:8px 0 10px}
+  .rec-list{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
+  .rec-item{display:flex;align-items:center;gap:10px;padding:9px 11px;background:var(--surface);
+    border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:14px;font-weight:600}
+  .rec-item input{width:18px;height:18px;accent-color:var(--sea);flex:0 0 auto;cursor:pointer}
 
   .selstops{list-style:none;margin:12px 0 0;padding:0}
   .selstops li{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:11px;
@@ -429,6 +445,7 @@
     <p class="lede">Rozwiń dzień i zaznacz, co chcecie zobaczyć. Aplikacja od razu przeliczy godziny, ułoży trasę na mapie i powie, czy zdążycie wrócić na kolację.</p>
     <div class="assume"><svg class="ic"><use href="#i-clock"/></svg>
       <span>Założenia: <b>wyjazd po śniadaniu ~8:30</b>, <b>powrót na kolację ~19:30</b>. Czasy dojazdów i zwiedzania są szacunkowe (zaokrąglone w górę), więc jest lekki zapas.</span></div>
+    <div id="reconcile"></div>
     <div id="planDays"></div>
 
     <div class="card" style="margin-top:18px">
@@ -689,6 +706,21 @@
   var openDay=null;
   var POI_ORDER=['pisa','lucca','livorno','castiglioncello','volterra','sangimignano','firenze','siena','cinqueterre','pienza'];
 
+  /* ---------- Postęp: minione dni + zwiedzone punkty ---------- */
+  var PROGKEY='wlochy2026-progress-v1';
+  var visited={}, reconciled={};
+  try{ var pg=JSON.parse(localStorage.getItem(PROGKEY)||'{}');
+    if(pg && pg.visited) pg.visited.forEach(function(id){ visited[id]=true; });
+    if(pg && pg.reconciled) pg.reconciled.forEach(function(dk){ reconciled[dk]=true; });
+  }catch(e){}
+  function persistProg(){ try{ localStorage.setItem(PROGKEY, JSON.stringify({visited:Object.keys(visited),reconciled:Object.keys(reconciled)})); }catch(e){} }
+  function todayMid(){ var ov=window.__TODAY__;
+    if(ov){ var o=(''+ov).split('-'); return new Date(+o[0],(+o[1])-1,+o[2]); }
+    var d=new Date(); return new Date(d.getFullYear(),d.getMonth(),d.getDate()); }
+  function dayDate(dk){ var p=dk.split('.'); return new Date(2026,(+p[1])-1,+p[0]); }
+  function isPast(dk){ return dayDate(dk).getTime() < todayMid().getTime(); }
+  function assignedElsewhere(id,day){ for(var dk in plan){ if(dk!==day && plan[dk] && plan[dk].indexOf(id)>=0) return dk; } return null; }
+
   /* ---------- Day map (schematic) ---------- */
   function dayMap(stops){
     var W=340,H=300,pad=26;
@@ -731,9 +763,14 @@
     if(type==='road'){ var rtxt=CAL.find(function(c){return c[0]===dateKey;})[2];
       return {txt:rtxt, pill: ROADINFO[dateKey]? '<span class="pill ok">'+ROADINFO[dateKey].badge+'</span>':''}; }
     var stops=plan[dateKey]||[];
-    if(!stops.length) return {txt:'Dzień w hotelu — plaża, basen, relaks', pill:''};
-    var r=schedule(stops);
+    var past=isPast(dateKey);
+    if(!stops.length) return {txt: past?'Dzień miniony':'Dzień w hotelu — plaża, basen, relaks', pill: past?'<span class="pill done">miniony</span>':''};
     var names=stops.map(function(s){return POI[s].name;}).join(' · ');
+    if(past){
+      var vc=stops.filter(function(s){return visited[s];}).length;
+      return {txt:names, pill:'<span class="pill done">'+(vc?('✓ zwiedzone '+vc+'/'+stops.length):'miniony')+'</span>'};
+    }
+    var r=schedule(stops);
     var pillCls = !r.feasible?'over':(r.margin<45?'tight':'ok');
     var pillTxt = !r.feasible?'za dużo':(r.margin<45?'na styk':'zdążycie');
     var pill='<span class="pill '+pillCls+'">'+(pillCls==='over'?'⚠ ':'')+'powrót '+fmt(r.home)+' · '+pillTxt+'</span>';
@@ -746,9 +783,12 @@
     h+='<div class="pick-title">Dodaj punkty do dnia</div><div class="poi-grid">';
     POI_ORDER.forEach(function(id){
       var p=POI[id], on=stops.indexOf(id)>=0;
-      h+='<label class="poi"><input type="checkbox" class="poi-cb" data-day="'+dateKey+'" data-poi="'+id+'"'+(on?' checked':'')+'>'+
-         '<span class="pn"><b>'+p.name+'</b><small>'+p.short+'</small></span>'+
-         '<span class="pmeta">dojazd '+Math.round(p.drive)+' min<br>zwiedz. '+(p.visit>=60?(Math.round(p.visit/60*10)/10+' h'):(p.visit+' min'))+'</span></label>';
+      var isVis=!!visited[id], elsewhere=assignedElsewhere(id,dateKey), disabled=(!on)&&(isVis||!!elsewhere);
+      var right = isVis ? '<span class="poi-flag done">✓ zwiedzone</span>'
+                : elsewhere ? '<span class="poi-flag">w planie<br>'+elsewhere+'</span>'
+                : '<span class="pmeta">dojazd '+Math.round(p.drive)+' min<br>zwiedz. '+(p.visit>=60?(Math.round(p.visit/60*10)/10+' h'):(p.visit+' min'))+'</span>';
+      h+='<label class="poi'+(disabled?' off':'')+'"><input type="checkbox" class="poi-cb" data-day="'+dateKey+'" data-poi="'+id+'"'+(on?' checked':'')+(disabled?' disabled':'')+'>'+
+         '<span class="pn"><b>'+p.name+'</b><small>'+p.short+'</small></span>'+right+'</label>';
     });
     h+='</div>';
     if(!stops.length){
@@ -826,12 +866,13 @@
   function renderPlan(){
     var h='';
     CAL.forEach(function(d){
-      var dateKey=d[0], type=d[3], editable=type!=='road', hasInfo=!!ROADINFO[dateKey], expandable=editable||hasInfo;
+      var dateKey=d[0], type=d[3], past=isPast(dateKey);
+      var editable=type!=='road' && !past, hasInfo=!!ROADINFO[dateKey], expandable=editable||(hasInfo&&!past);
       var st=dayStatus(dateKey,type), isOpen=openDay===dateKey;
-      h+='<div class="pday '+ (type==='road'?'road':(plan[dateKey]&&plan[dateKey].length?'trip':'rest')) +(isOpen?' open':'')+'">';
+      h+='<div class="pday '+ (type==='road'?'road':(plan[dateKey]&&plan[dateKey].length?'trip':'rest')) +(past?' past':'')+(isOpen?' open':'')+'">';
       h+='<button class="pday-head" '+(expandable?'data-act="toggle" data-day="'+dateKey+'"':'disabled style="cursor:default"')+'>';
       h+='<span class="pday-date">'+dateKey+'<small>'+d[1]+'</small></span>';
-      h+='<span class="pday-mid"><span class="pday-title">'+(editable?(plan[dateKey]&&plan[dateKey].length?'Wycieczka':'Dzień wolny'):d[2])+'</span>';
+      h+='<span class="pday-mid"><span class="pday-title">'+(type!=='road'?(plan[dateKey]&&plan[dateKey].length?'Wycieczka':'Dzień wolny'):d[2])+'</span>';
       h+='<span class="pday-status">'+st.txt+' '+(st.pill||'')+'</span></span>';
       if(expandable) h+='<span class="pday-caret"><svg class="ic"><use href="#i-caret"/></svg></span>';
       h+='</button>';
@@ -856,9 +897,43 @@
   planDays.addEventListener('change',function(e){
     var cb=e.target.closest('.poi-cb'); if(!cb) return;
     var day=cb.dataset.day, poi=cb.dataset.poi, arr=plan[day]||(plan[day]=[]);
-    if(cb.checked){ if(arr.indexOf(poi)<0) arr.push(poi); } else { plan[day]=arr.filter(function(x){return x!==poi;}); }
-    persist(); renderPlan();
+    if(cb.checked){
+      for(var dk in plan){ if(dk!==day && plan[dk]){ plan[dk]=plan[dk].filter(function(x){return x!==poi;}); } }
+      if(arr.indexOf(poi)<0) arr.push(poi);
+    } else { plan[day]=arr.filter(function(x){return x!==poi;}); }
+    persist(); renderReconcile(); renderPlan();
   });
+
+  /* ---------- Rozliczenie minionych dni wycieczkowych ---------- */
+  var recEl=document.getElementById('reconcile');
+  function renderReconcile(){
+    var due=[];
+    CAL.forEach(function(d){ var dk=d[0]; if(d[3]==='road') return; if(!isPast(dk)) return; if(reconciled[dk]) return; if((plan[dk]||[]).length) due.push(dk); });
+    if(!due.length){ recEl.innerHTML=''; return; }
+    var h='';
+    due.forEach(function(dk){
+      h+='<div class="reccard"><div class="rec-hd"><svg class="ic"><use href="#i-clock"/></svg><b>Dzień '+dk+' minął</b></div>'+
+         '<p class="rec-q">Byliście w tych miejscach? Odznacz te, których <b>nie</b> odwiedziliście — wrócą do puli i będzie je można zaplanować jeszcze raz.</p><div class="rec-list">';
+      (plan[dk]||[]).forEach(function(id){
+        h+='<label class="rec-item"><input type="checkbox" class="rec-cb" data-day="'+dk+'" data-poi="'+id+'" checked><span>'+POI[id].name+'</span></label>';
+      });
+      h+='</div><div class="btnrow"><button class="btn btn-sea btn-sm" data-recsave="'+dk+'"><svg class="ic" style="width:14px;height:14px"><use href="#i-check"/></svg>Zatwierdź dzień</button></div></div>';
+    });
+    recEl.innerHTML=h;
+  }
+  recEl.addEventListener('click',function(e){
+    var b=e.target.closest('[data-recsave]'); if(!b) return;
+    var dk=b.dataset.recsave;
+    var cbs=[].slice.call(recEl.querySelectorAll('.rec-cb[data-day="'+dk+'"]'));
+    var keep=[];
+    cbs.forEach(function(cb){ var id=cb.dataset.poi; if(cb.checked){ visited[id]=true; keep.push(id); } });
+    plan[dk]=keep;               /* zwiedzone zostają jako miniony dzień; pominięte wracają do puli */
+    reconciled[dk]=true;
+    persist(); persistProg();
+    renderReconcile(); renderPlan();
+  });
+
+  renderReconcile();
   renderPlan();
 
   /* ---------- Scene illustrations (postcards) ---------- */
@@ -953,7 +1028,7 @@
         {t:'~15:00',desc:'Powrót (~2 h 20), na kolację ~17:20.',plain:true}]}
   ];
   function dayOptions(sel){
-    return CAL.filter(function(c){return c[3]!=='road';}).map(function(c){
+    return CAL.filter(function(c){return c[3]!=='road' && !isPast(c[0]);}).map(function(c){
       return '<option value="'+c[0]+'"'+(c[0]===sel?' selected':'')+'>'+c[0]+' ('+c[1]+')</option>';
     }).join('');
   }
@@ -979,7 +1054,10 @@
       var b=e.target.closest('[data-act="addscn"]'); if(!b) return;
       var s=ALLSCN[b.dataset.scn];
       var sel=b.parentNode.querySelector('.day-pick'); var day=sel.value;
-      plan[day]=s.pois.slice(); persist();
+      if(!day) return;
+      var pois=s.pois.filter(function(id){return !visited[id];});
+      for(var dk in plan){ if(dk!==day && plan[dk]){ plan[dk]=plan[dk].filter(function(x){return pois.indexOf(x)<0;}); } }
+      plan[day]=pois; persist(); renderReconcile();
       openDay=day; renderPlan(); showTab('plan');
       window.scrollTo({top:0,behavior:'smooth'});
       setTimeout(function(){ var el=planDays.querySelector('.pday.open'); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); },260);
