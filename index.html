@@ -204,6 +204,12 @@
   .rec-item{display:flex;align-items:center;gap:10px;padding:9px 11px;background:var(--surface);
     border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:14px;font-weight:600}
   .rec-item input{width:18px;height:18px;accent-color:var(--sea);flex:0 0 auto;cursor:pointer}
+  .rinfo-eat{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:11px;
+    border:1px solid var(--line);background:var(--surface-2);margin-bottom:7px}
+  .rinfo-eat .n{flex:1;min-width:0}
+  .rinfo-eat .n b{font-size:14px;display:block;line-height:1.25}
+  .rinfo-eat .n small{font-size:11.5px;color:var(--muted)}
+  .rinfo-eat .btn{flex:0 0 auto}
 
   .selstops{list-style:none;margin:12px 0 0;padding:0}
   .selstops li{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:11px;
@@ -626,6 +632,35 @@
 
   /* ---------- Rozpisane dni przejazdowe ---------- */
   var ROADINFO={
+    '23.07':{
+      badge:'Obiad w Brnie',
+      intro:'Pierwszy dzień w drodze: Polska → Graz, z postojem na obiad i krótki spacer w Brnie ok. 14:00. Auto zostawiacie w podziemnym parkingu w centrum — wszystko poniżej jest w zasięgu spaceru.',
+      steps:[
+        {clk:'rano',cls:'drive',txt:'<b>Wyjazd z Polski</b> — trasa przez Czechy (Ostrawa → Brno)'},
+        {clk:'14:00',cls:'drive',txt:'<b>Brno</b> — parking <b>Parkovací dům Domini Park</b> (podziemny, ul. Dominikánská, centrum)'},
+        {clk:'14:00',cls:'lunch',txt:'<b>Obiad</b> w jednej z restauracji poniżej (~1 h)'},
+        {clk:'15:00',cls:'visit',txt:'<b>Spacer</b> po starówce — Zelný trh, ratusz z „brneńskim smokiem”, nám. Svobody (~1 h)'},
+        {clk:'16:00',cls:'drive',txt:'Wyjazd z Brna → <b>Graz</b> (~2,5–3 h przez Wiedeń)'},
+        {clk:'19:00',cls:'visit',txt:'<b>Graz</b> — nocleg w JUFA Hotel Graz City'}
+      ],
+      parkQ:'Parkovací dům Domini Park, Brno',
+      parkLabel:'Parking Domini Park w Google Maps',
+      food:[
+        {name:'Lokál U Caipla',desc:'Czeska kuchnia z grupy Ambiente — świeże, swojskie, przyjazne dzieciom. Kilka minut od parkingu.',q:'Lokál U Caipla Brno'},
+        {name:'Stopkova plzeňská pivnice',desc:'Klasyczna czeska restauracja przy ul. Česká — sznycle, svíčková, dużo miejsca.',q:'Stopkova plzeňská pivnice Brno'},
+        {name:'Restaurace Špalíček',desc:'Tradycyjna gospoda prosto na Zelným trhu (targ warzywny) — taras, blisko atrakcji.',q:'Restaurace Špalíček Zelný trh Brno'}
+      ],
+      see:[
+        {name:'Zelný trh + fontanna Parnas',desc:'Historyczny targ warzywny tuż przy parkingu — płasko.',q:'Zelný trh Brno'},
+        {name:'Stará radnice — „brneński smok”',desc:'Legendarny smok (krokodyl) i krzywa wieżyczka w bramie starego ratusza — hit dla dzieci.',q:'Stará radnice Brno'},
+        {name:'Náměstí Svobody',desc:'Główny plac z nietypowym zegarem astronomicznym; płasko, dobre na koniec spaceru.',q:'náměstí Svobody Brno'}
+      ],
+      notes:[
+        {warn:false,html:'Domini Park to parking <b>podziemny</b>, płatny, czynny całą dobę (wjazd od ul. Dominikánská). Zapiszcie poziom i miejsce.'},
+        {warn:true,html:'Katedra na Petrově i zamek Špilberk są pod górę — przy godzinnym postoju i z Alą lepiej zostać na płaskiej starówce (Zelný trh → ratusz → nám. Svobody).'},
+        {warn:false,html:'W Czechach płacicie w koronach (CZK), karty działają wszędzie. Pamiętajcie o <b>czeskiej e-winiecie</b> — kupcie online przed wjazdem (edalnice.cz).'}
+      ]
+    },
     '24.07':{
       badge:'Wenecja po drodze',
       intro:'Dwa długie przejazdy i krótki przystanek w Wenecji. Klucz: wyjazd z Graz ~8:00 i wyjazd z Wenecji najpóźniej ~15:30, żeby zdążyć na kolację w Tirrenii o 20:10.',
@@ -858,6 +893,16 @@
     if(info.parkQ){
       h+='<div class="btnrow" style="margin-top:12px"><a class="btn btn-sea" target="_blank" rel="noopener" href="'+pinUrl(info.parkQ)+'"><svg class="ic"><use href="#i-pin"/></svg>'+info.parkLabel+'</a></div>';
     }
+    function rinfoList(title,arr){
+      var s='<div class="pick-title" style="margin-top:16px">'+title+'</div>';
+      arr.forEach(function(f){
+        s+='<div class="rinfo-eat"><span class="n"><b>'+f.name+'</b><small>'+f.desc+'</small></span>'+
+           '<a class="btn btn-map btn-sm" target="_blank" rel="noopener" href="'+pinUrl(f.q)+'"><svg class="ic" style="width:14px;height:14px"><use href="#i-pin"/></svg>Mapa</a></div>';
+      });
+      return s;
+    }
+    if(info.food && info.food.length) h+=rinfoList('Gdzie zjeść z dziećmi',info.food);
+    if(info.see && info.see.length) h+=rinfoList('Na spacer — max 1 h',info.see);
     info.notes.forEach(function(n){
       h+='<div class="note'+(n.warn?' warn':'')+'"><svg class="ic"><use href="#'+(n.warn?'i-warn':'i-info')+'"/></svg><span>'+n.html+'</span></div>';
     });
